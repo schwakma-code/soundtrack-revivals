@@ -1,0 +1,417 @@
+year,kind,title,season,event_date,has_album,biopic,tmdb_url
+2007,film,Harry Potter and the Order of the Phoenix,,2007-07-08,True,False,https://www.themoviedb.org/movie/675
+2007,film,Ratatouille,,2007-06-28,True,False,https://www.themoviedb.org/movie/2062
+2007,film,I Am Legend,,2007-12-12,True,False,https://www.themoviedb.org/movie/6479
+2007,film,Pirates of the Caribbean: At World's End,,2007-05-19,False,False,https://www.themoviedb.org/movie/285
+2007,film,Spider-Man 3,,2007-05-01,True,False,https://www.themoviedb.org/movie/559
+2007,film,300,,2007-03-07,True,False,https://www.themoviedb.org/movie/1271
+2007,film,No Country for Old Men,,2007-11-09,False,False,https://www.themoviedb.org/movie/6977
+2007,film,Transformers,,2007-06-27,True,False,https://www.themoviedb.org/movie/1858
+2007,film,Zodiac,,2007-03-02,True,False,https://www.themoviedb.org/movie/1949
+2007,film,Into the Wild,,2007-09-21,True,False,https://www.themoviedb.org/movie/5915
+2007,series,The Big Bang Theory,1,2007-09-24,False,False,https://www.themoviedb.org/tv/1418/season/1
+2007,series,The Simpsons,19,2007-09-23,False,False,https://www.themoviedb.org/tv/456/season/19
+2007,series,Grey's Anatomy,4,2007-09-27,False,False,https://www.themoviedb.org/tv/1416/season/4
+2007,series,Naruto Shippūden,1,2007-02-15,False,False,https://www.themoviedb.org/tv/31910/season/1
+2007,series,Naruto Shippūden,2,2007-11-06,False,False,https://www.themoviedb.org/tv/31910/season/2
+2007,series,Supernatural,3,2007-10-04,False,False,https://www.themoviedb.org/tv/1622/season/3
+2007,series,House,4,2007-09-25,False,False,https://www.themoviedb.org/tv/1408/season/4
+2007,series,Prison Break,3,2007-09-17,True,False,https://www.themoviedb.org/tv/2288/season/3
+2007,series,How I Met Your Mother,3,2007-09-24,False,False,https://www.themoviedb.org/tv/1100/season/3
+2007,series,Dexter,2,2007-09-30,True,False,https://www.themoviedb.org/tv/1405/season/2
+2007,series,The Office,4,2007-09-27,False,False,https://www.themoviedb.org/tv/2316/season/4
+2008,film,The Dark Knight,,2008-07-16,True,False,https://www.themoviedb.org/movie/155
+2008,film,Iron Man,,2008-04-30,True,False,https://www.themoviedb.org/movie/1726
+2008,film,WALL·E,,2008-06-26,False,False,https://www.themoviedb.org/movie/10681
+2008,film,Twilight,,2008-11-20,True,False,https://www.themoviedb.org/movie/8966
+2008,film,The Curious Case of Benjamin Button,,2008-12-25,True,False,https://www.themoviedb.org/movie/4922
+2008,film,The Incredible Hulk,,2008-06-12,False,False,https://www.themoviedb.org/movie/1724
+2008,film,Kung Fu Panda,,2008-06-04,True,False,https://www.themoviedb.org/movie/9502
+2008,film,Taken,,2008-02-18,True,False,https://www.themoviedb.org/movie/8681
+2008,film,Gran Torino,,2008-12-12,True,False,https://www.themoviedb.org/movie/13223
+2008,film,Slumdog Millionaire,,2008-11-12,True,False,https://www.themoviedb.org/movie/12405
+2008,series,Breaking Bad,1,2008-01-20,False,False,https://www.themoviedb.org/tv/1396/season/1
+2008,series,The Big Bang Theory,2,2008-09-22,False,False,https://www.themoviedb.org/tv/1418/season/2
+2008,series,The Simpsons,20,2008-09-28,False,False,https://www.themoviedb.org/tv/456/season/20
+2008,series,Grey's Anatomy,5,2008-09-25,False,False,https://www.themoviedb.org/tv/1416/season/5
+2008,series,Naruto Shippūden,3,2008-04-02,False,False,https://www.themoviedb.org/tv/31910/season/3
+2008,series,Naruto Shippūden,4,2008-08-20,False,False,https://www.themoviedb.org/tv/31910/season/4
+2008,series,Naruto Shippūden,5,2008-12-17,False,False,https://www.themoviedb.org/tv/31910/season/5
+2008,series,Supernatural,4,2008-09-18,False,False,https://www.themoviedb.org/tv/1622/season/4
+2008,series,House,5,2008-09-16,False,False,https://www.themoviedb.org/tv/1408/season/5
+2008,series,Prison Break,4,2008-09-01,False,False,https://www.themoviedb.org/tv/2288/season/4
+2008,series,How I Met Your Mother,4,2008-09-22,False,False,https://www.themoviedb.org/tv/1100/season/4
+2008,series,Dexter,3,2008-09-28,False,False,https://www.themoviedb.org/tv/1405/season/3
+2009,film,Avatar,,2009-12-16,True,False,https://www.themoviedb.org/movie/19995
+2009,film,Inglourious Basterds,,2009-08-02,False,False,https://www.themoviedb.org/movie/16869
+2009,film,Up,,2009-05-28,True,False,https://www.themoviedb.org/movie/14160
+2009,film,Harry Potter and the Half-Blood Prince,,2009-07-15,True,False,https://www.themoviedb.org/movie/767
+2009,film,The Hangover,,2009-06-02,True,False,https://www.themoviedb.org/movie/18785
+2009,film,Sherlock Holmes,,2009-12-23,True,False,https://www.themoviedb.org/movie/10528
+2009,film,Zombieland,,2009-10-02,True,False,https://www.themoviedb.org/movie/19908
+2009,film,2012,,2009-10-10,True,False,https://www.themoviedb.org/movie/14161
+2009,film,X-Men Origins: Wolverine,,2009-04-28,True,False,https://www.themoviedb.org/movie/2080
+2009,film,(500) Days of Summer,,2009-07-17,True,False,https://www.themoviedb.org/movie/19913
+2009,series,Breaking Bad,2,2009-03-08,False,False,https://www.themoviedb.org/tv/1396/season/2
+2009,series,The Big Bang Theory,3,2009-09-21,False,False,https://www.themoviedb.org/tv/1418/season/3
+2009,series,The Simpsons,21,2009-09-27,False,False,https://www.themoviedb.org/tv/456/season/21
+2009,series,Grey's Anatomy,6,2009-09-24,False,False,https://www.themoviedb.org/tv/1416/season/6
+2009,series,The Vampire Diaries,1,2009-09-10,False,False,https://www.themoviedb.org/tv/18165/season/1
+2009,series,Naruto Shippūden,6,2009-06-10,False,False,https://www.themoviedb.org/tv/31910/season/6
+2009,series,Supernatural,5,2009-09-10,False,False,https://www.themoviedb.org/tv/1622/season/5
+2009,series,House,6,2009-09-21,False,False,https://www.themoviedb.org/tv/1408/season/6
+2009,series,How I Met Your Mother,5,2009-09-21,False,False,https://www.themoviedb.org/tv/1100/season/5
+2009,series,Dexter,4,2009-09-27,False,False,https://www.themoviedb.org/tv/1405/season/4
+2010,film,Inception,,2010-07-15,True,False,https://www.themoviedb.org/movie/27205
+2010,film,Shutter Island,,2010-02-14,True,False,https://www.themoviedb.org/movie/11324
+2010,film,Iron Man 2,,2010-04-28,True,False,https://www.themoviedb.org/movie/10138
+2010,film,Harry Potter and the Deathly Hallows: Part 1,,2010-11-17,False,False,https://www.themoviedb.org/movie/12444
+2010,film,Despicable Me,,2010-07-08,True,False,https://www.themoviedb.org/movie/20352
+2010,film,Toy Story 3,,2010-06-16,True,False,https://www.themoviedb.org/movie/10193
+2010,film,Black Swan,,2010-12-03,True,False,https://www.themoviedb.org/movie/44214
+2010,film,Alice in Wonderland,,2010-03-03,True,False,https://www.themoviedb.org/movie/12155
+2010,film,How to Train Your Dragon,,2010-03-18,True,False,https://www.themoviedb.org/movie/10191
+2010,film,The Social Network,,2010-10-01,True,False,https://www.themoviedb.org/movie/37799
+2010,series,Breaking Bad,3,2010-03-21,True,False,https://www.themoviedb.org/tv/1396/season/3
+2010,series,The Walking Dead,1,2010-10-31,True,False,https://www.themoviedb.org/tv/1402/season/1
+2010,series,The Big Bang Theory,4,2010-09-23,False,False,https://www.themoviedb.org/tv/1418/season/4
+2010,series,The Simpsons,22,2010-09-26,False,False,https://www.themoviedb.org/tv/456/season/22
+2010,series,Grey's Anatomy,7,2010-09-23,False,False,https://www.themoviedb.org/tv/1416/season/7
+2010,series,The Vampire Diaries,2,2010-09-09,True,False,https://www.themoviedb.org/tv/18165/season/2
+2010,series,Naruto Shippūden,7,2010-01-20,False,False,https://www.themoviedb.org/tv/31910/season/7
+2010,series,Naruto Shippūden,8,2010-03-24,False,False,https://www.themoviedb.org/tv/31910/season/8
+2010,series,Naruto Shippūden,9,2010-09-01,False,False,https://www.themoviedb.org/tv/31910/season/9
+2010,series,Supernatural,6,2010-09-24,True,False,https://www.themoviedb.org/tv/1622/season/6
+2010,series,House,7,2010-09-20,False,False,https://www.themoviedb.org/tv/1408/season/7
+2010,series,Sherlock,1,2010-07-25,False,False,https://www.themoviedb.org/tv/19885/season/1
+2011,film,Captain America: The First Avenger,,2011-07-22,True,False,https://www.themoviedb.org/movie/1771
+2011,film,Thor,,2011-04-27,True,False,https://www.themoviedb.org/movie/10195
+2011,film,Harry Potter and the Deathly Hallows: Part 2,,2011-07-12,False,False,https://www.themoviedb.org/movie/12445
+2011,film,The Intouchables,,2011-11-02,False,False,https://www.themoviedb.org/movie/77338
+2011,film,Pirates of the Caribbean: On Stranger Tides,,2011-05-15,True,False,https://www.themoviedb.org/movie/1865
+2011,film,Drive,,2011-09-15,True,False,https://www.themoviedb.org/movie/64690
+2011,film,X-Men: First Class,,2011-06-01,True,False,https://www.themoviedb.org/movie/49538
+2011,film,Rise of the Planet of the Apes,,2011-08-03,True,False,https://www.themoviedb.org/movie/61791
+2011,film,In Time,,2011-10-27,False,False,https://www.themoviedb.org/movie/49530
+2011,film,Limitless,,2011-03-17,True,False,https://www.themoviedb.org/movie/51876
+2011,series,Game of Thrones,1,2011-04-17,True,False,https://www.themoviedb.org/tv/1399/season/1
+2011,series,Breaking Bad,4,2011-07-17,False,False,https://www.themoviedb.org/tv/1396/season/4
+2011,series,The Walking Dead,2,2011-10-16,False,False,https://www.themoviedb.org/tv/1402/season/2
+2011,series,The Big Bang Theory,5,2011-09-22,False,False,https://www.themoviedb.org/tv/1418/season/5
+2011,series,The Simpsons,23,2011-09-25,False,False,https://www.themoviedb.org/tv/456/season/23
+2011,series,Grey's Anatomy,8,2011-09-22,False,False,https://www.themoviedb.org/tv/1416/season/8
+2011,series,The Vampire Diaries,3,2011-09-15,False,False,https://www.themoviedb.org/tv/18165/season/3
+2011,series,Naruto Shippūden,10,2011-02-10,False,False,https://www.themoviedb.org/tv/31910/season/10
+2011,series,Naruto Shippūden,11,2011-07-28,False,False,https://www.themoviedb.org/tv/31910/season/11
+2011,series,Supernatural,7,2011-09-23,False,False,https://www.themoviedb.org/tv/1622/season/7
+2011,series,House,8,2011-10-03,False,False,https://www.themoviedb.org/tv/1408/season/8
+2012,film,The Avengers,,2012-04-25,True,False,https://www.themoviedb.org/movie/24428
+2012,film,Django Unchained,,2012-12-25,True,False,https://www.themoviedb.org/movie/68718
+2012,film,The Dark Knight Rises,,2012-07-17,True,False,https://www.themoviedb.org/movie/49026
+2012,film,The Hunger Games,,2012-03-12,False,False,https://www.themoviedb.org/movie/70160
+2012,film,The Hobbit: An Unexpected Journey,,2012-12-12,True,False,https://www.themoviedb.org/movie/49051
+2012,film,The Amazing Spider-Man,,2012-06-23,True,False,https://www.themoviedb.org/movie/1930
+2012,film,Skyfall,,2012-10-24,True,False,https://www.themoviedb.org/movie/37724
+2012,film,Brave,,2012-06-21,True,False,https://www.themoviedb.org/movie/62177
+2012,film,Life of Pi,,2012-11-20,True,False,https://www.themoviedb.org/movie/87827
+2012,film,Prometheus,,2012-05-30,True,False,https://www.themoviedb.org/movie/70981
+2012,series,Game of Thrones,2,2012-04-01,True,False,https://www.themoviedb.org/tv/1399/season/2
+2012,series,Breaking Bad,5,2012-07-15,False,False,https://www.themoviedb.org/tv/1396/season/5
+2012,series,The Walking Dead,3,2012-10-14,False,False,https://www.themoviedb.org/tv/1402/season/3
+2012,series,The Big Bang Theory,6,2012-09-27,False,False,https://www.themoviedb.org/tv/1418/season/6
+2012,series,The Simpsons,24,2012-09-30,False,False,https://www.themoviedb.org/tv/456/season/24
+2012,series,Grey's Anatomy,9,2012-09-27,False,False,https://www.themoviedb.org/tv/1416/season/9
+2012,series,The Vampire Diaries,4,2012-10-11,False,False,https://www.themoviedb.org/tv/18165/season/4
+2012,series,Naruto Shippūden,12,2012-01-04,False,False,https://www.themoviedb.org/tv/31910/season/12
+2012,series,Naruto Shippūden,13,2012-08-22,False,False,https://www.themoviedb.org/tv/31910/season/13
+2012,series,Supernatural,8,2012-10-03,False,False,https://www.themoviedb.org/tv/1622/season/8
+2012,series,Sherlock,2,2012-01-01,False,False,https://www.themoviedb.org/tv/19885/season/2
+2013,film,The Wolf of Wall Street,,2013-12-25,True,False,https://www.themoviedb.org/movie/106646
+2013,film,Iron Man 3,,2013-04-18,True,False,https://www.themoviedb.org/movie/68721
+2013,film,The Hunger Games: Catching Fire,,2013-11-15,True,False,https://www.themoviedb.org/movie/101299
+2013,film,Thor: The Dark World,,2013-10-30,True,False,https://www.themoviedb.org/movie/76338
+2013,film,Frozen,,2013-11-20,True,False,https://www.themoviedb.org/movie/109445
+2013,film,Now You See Me,,2013-05-29,True,False,https://www.themoviedb.org/movie/75656
+2013,film,World War Z,,2013-06-19,True,False,https://www.themoviedb.org/movie/72190
+2013,film,Gravity,,2013-10-03,True,False,https://www.themoviedb.org/movie/49047
+2013,film,Man of Steel,,2013-06-12,True,False,https://www.themoviedb.org/movie/49521
+2013,film,Her,,2013-12-18,True,False,https://www.themoviedb.org/movie/152601
+2013,series,Game of Thrones,3,2013-03-31,True,False,https://www.themoviedb.org/tv/1399/season/3
+2013,series,The Walking Dead,4,2013-10-13,False,False,https://www.themoviedb.org/tv/1402/season/4
+2013,series,The Big Bang Theory,7,2013-09-26,False,False,https://www.themoviedb.org/tv/1418/season/7
+2013,series,Rick and Morty,1,2013-12-02,False,False,https://www.themoviedb.org/tv/60625/season/1
+2013,series,Peaky Blinders,1,2013-09-12,False,False,https://www.themoviedb.org/tv/60574/season/1
+2013,series,The Simpsons,25,2013-09-29,False,False,https://www.themoviedb.org/tv/456/season/25
+2013,series,Grey's Anatomy,10,2013-09-26,False,False,https://www.themoviedb.org/tv/1416/season/10
+2013,series,The Vampire Diaries,5,2013-10-03,False,False,https://www.themoviedb.org/tv/18165/season/5
+2013,series,Naruto Shippūden,14,2013-01-16,False,False,https://www.themoviedb.org/tv/31910/season/14
+2013,series,Naruto Shippūden,15,2013-07-18,False,False,https://www.themoviedb.org/tv/31910/season/15
+2013,series,Supernatural,9,2013-10-08,False,False,https://www.themoviedb.org/tv/1622/season/9
+2014,film,Interstellar,,2014-11-04,True,False,https://www.themoviedb.org/movie/157336
+2014,film,Guardians of the Galaxy,,2014-07-30,True,False,https://www.themoviedb.org/movie/118340
+2014,film,John Wick,,2014-10-16,True,False,https://www.themoviedb.org/movie/245891
+2014,film,Captain America: The Winter Soldier,,2014-03-20,True,False,https://www.themoviedb.org/movie/100402
+2014,film,Gone Girl,,2014-10-01,True,False,https://www.themoviedb.org/movie/210577
+2014,film,The Maze Runner,,2014-09-10,True,False,https://www.themoviedb.org/movie/198663
+2014,film,The Imitation Game,,2014-11-14,True,False,https://www.themoviedb.org/movie/205596
+2014,film,Lucy,,2014-07-25,False,False,https://www.themoviedb.org/movie/240832
+2014,film,Whiplash,,2014-10-10,True,False,https://www.themoviedb.org/movie/244786
+2014,film,The Hunger Games: Mockingjay - Part 1,,2014-11-19,True,False,https://www.themoviedb.org/movie/131631
+2014,series,Game of Thrones,4,2014-04-06,True,False,https://www.themoviedb.org/tv/1399/season/4
+2014,series,The Walking Dead,5,2014-10-12,False,False,https://www.themoviedb.org/tv/1402/season/5
+2014,series,The Big Bang Theory,8,2014-09-22,False,False,https://www.themoviedb.org/tv/1418/season/8
+2014,series,The Flash,1,2014-10-06,True,False,https://www.themoviedb.org/tv/60735/season/1
+2014,series,Peaky Blinders,2,2014-10-02,False,False,https://www.themoviedb.org/tv/60574/season/2
+2014,series,The Simpsons,26,2014-09-28,False,False,https://www.themoviedb.org/tv/456/season/26
+2014,series,Grey's Anatomy,11,2014-09-25,False,False,https://www.themoviedb.org/tv/1416/season/11
+2014,series,The Vampire Diaries,6,2014-10-02,False,False,https://www.themoviedb.org/tv/18165/season/6
+2014,series,The 100,1,2014-03-19,True,False,https://www.themoviedb.org/tv/48866/season/1
+2014,series,The 100,2,2014-10-22,False,False,https://www.themoviedb.org/tv/48866/season/2
+2014,series,Naruto Shippūden,16,2014-02-05,False,False,https://www.themoviedb.org/tv/31910/season/16
+2014,series,Naruto Shippūden,17,2014-05-14,False,False,https://www.themoviedb.org/tv/31910/season/17
+2014,series,Naruto Shippūden,18,2014-08-20,False,False,https://www.themoviedb.org/tv/31910/season/18
+2015,film,Avengers: Age of Ultron,,2015-04-22,True,False,https://www.themoviedb.org/movie/99861
+2015,film,Mad Max: Fury Road,,2015-05-13,True,False,https://www.themoviedb.org/movie/76341
+2015,film,Inside Out,,2015-06-17,True,False,https://www.themoviedb.org/movie/150540
+2015,film,Jurassic World,,2015-06-06,True,False,https://www.themoviedb.org/movie/135397
+2015,film,The Martian,,2015-09-30,True,False,https://www.themoviedb.org/movie/286217
+2015,film,Ant-Man,,2015-07-14,True,False,https://www.themoviedb.org/movie/102899
+2015,film,Star Wars: The Force Awakens,,2015-12-15,True,False,https://www.themoviedb.org/movie/140607
+2015,film,The Revenant,,2015-12-25,True,False,https://www.themoviedb.org/movie/281957
+2015,film,Kingsman: The Secret Service,,2015-01-24,True,False,https://www.themoviedb.org/movie/207703
+2015,film,The Hateful Eight,,2015-12-25,True,False,https://www.themoviedb.org/movie/273248
+2015,series,Game of Thrones,5,2015-04-12,True,False,https://www.themoviedb.org/tv/1399/season/5
+2015,series,The Walking Dead,6,2015-10-11,False,False,https://www.themoviedb.org/tv/1402/season/6
+2015,series,The Big Bang Theory,9,2015-09-21,False,False,https://www.themoviedb.org/tv/1418/season/9
+2015,series,The Flash,2,2015-10-05,True,False,https://www.themoviedb.org/tv/60735/season/2
+2015,series,Rick and Morty,2,2015-07-26,False,False,https://www.themoviedb.org/tv/60625/season/2
+2015,series,The Simpsons,27,2015-09-27,False,False,https://www.themoviedb.org/tv/456/season/27
+2015,series,Grey's Anatomy,12,2015-09-24,False,False,https://www.themoviedb.org/tv/1416/season/12
+2015,series,The Vampire Diaries,7,2015-10-08,False,False,https://www.themoviedb.org/tv/18165/season/7
+2015,series,Naruto Shippūden,20,2015-05-27,False,False,https://www.themoviedb.org/tv/31910/season/20
+2015,series,Supernatural,11,2015-10-07,False,False,https://www.themoviedb.org/tv/1622/season/11
+2016,film,Deadpool,,2016-02-09,True,False,https://www.themoviedb.org/movie/293660
+2016,film,Captain America: Civil War,,2016-04-27,True,False,https://www.themoviedb.org/movie/271110
+2016,film,Doctor Strange,,2016-10-25,True,False,https://www.themoviedb.org/movie/284052
+2016,film,Suicide Squad,,2016-08-03,True,False,https://www.themoviedb.org/movie/297761
+2016,film,Fantastic Beasts and Where to Find Them,,2016-11-16,True,False,https://www.themoviedb.org/movie/259316
+2016,film,Arrival,,2016-11-10,True,False,https://www.themoviedb.org/movie/329865
+2016,film,Batman v Superman: Dawn of Justice,,2016-03-23,True,False,https://www.themoviedb.org/movie/209112
+2016,film,Zootopia,,2016-02-11,True,False,https://www.themoviedb.org/movie/269149
+2016,film,La La Land,,2016-12-01,True,False,https://www.themoviedb.org/movie/313369
+2016,film,Rogue One: A Star Wars Story,,2016-12-14,True,False,https://www.themoviedb.org/movie/330459
+2016,series,Game of Thrones,6,2016-04-24,True,False,https://www.themoviedb.org/tv/1399/season/6
+2016,series,Stranger Things,1,2016-07-15,False,False,https://www.themoviedb.org/tv/66732/season/1
+2016,series,The Walking Dead,7,2016-10-23,False,False,https://www.themoviedb.org/tv/1402/season/7
+2016,series,Lucifer,1,2016-01-25,False,False,https://www.themoviedb.org/tv/63174/season/1
+2016,series,Lucifer,2,2016-09-19,False,False,https://www.themoviedb.org/tv/63174/season/2
+2016,series,The Big Bang Theory,10,2016-09-19,False,False,https://www.themoviedb.org/tv/1418/season/10
+2016,series,The Flash,3,2016-10-03,True,False,https://www.themoviedb.org/tv/60735/season/3
+2016,series,Peaky Blinders,3,2016-05-05,False,False,https://www.themoviedb.org/tv/60574/season/3
+2016,series,The Simpsons,28,2016-09-25,False,False,https://www.themoviedb.org/tv/456/season/28
+2016,series,Grey's Anatomy,13,2016-09-22,False,False,https://www.themoviedb.org/tv/1416/season/13
+2016,series,The Vampire Diaries,8,2016-10-21,False,False,https://www.themoviedb.org/tv/18165/season/8
+2017,film,Spider-Man: Homecoming,,2017-07-05,True,False,https://www.themoviedb.org/movie/315635
+2017,film,Guardians of the Galaxy Vol. 2,,2017-04-25,True,False,https://www.themoviedb.org/movie/283995
+2017,film,Thor: Ragnarok,,2017-10-24,True,False,https://www.themoviedb.org/movie/284053
+2017,film,Coco,,2017-10-27,True,False,https://www.themoviedb.org/movie/354912
+2017,film,Wonder Woman,,2017-05-30,True,False,https://www.themoviedb.org/movie/297762
+2017,film,Logan,,2017-02-28,True,False,https://www.themoviedb.org/movie/263115
+2017,film,It,,2017-09-06,False,False,https://www.themoviedb.org/movie/346364
+2017,film,Get Out,,2017-02-24,True,False,https://www.themoviedb.org/movie/419430
+2017,film,Split,,2017-01-19,True,False,https://www.themoviedb.org/movie/381288
+2017,film,Dunkirk,,2017-07-19,True,False,https://www.themoviedb.org/movie/374720
+2017,series,Game of Thrones,7,2017-07-16,True,False,https://www.themoviedb.org/tv/1399/season/7
+2017,series,Stranger Things,2,2017-10-27,True,False,https://www.themoviedb.org/tv/66732/season/2
+2017,series,Money Heist,1,2017-05-02,False,False,https://www.themoviedb.org/tv/71446/season/1
+2017,series,The Walking Dead,8,2017-10-22,True,False,https://www.themoviedb.org/tv/1402/season/8
+2017,series,Lucifer,3,2017-10-02,False,False,https://www.themoviedb.org/tv/63174/season/3
+2017,series,Riverdale,1,2017-01-26,True,False,https://www.themoviedb.org/tv/69050/season/1
+2017,series,Riverdale,2,2017-10-11,True,False,https://www.themoviedb.org/tv/69050/season/2
+2017,series,The Good Doctor,1,2017-09-25,False,False,https://www.themoviedb.org/tv/71712/season/1
+2017,series,The Big Bang Theory,11,2017-09-25,False,False,https://www.themoviedb.org/tv/1418/season/11
+2017,series,The Flash,4,2017-10-10,True,False,https://www.themoviedb.org/tv/60735/season/4
+2017,series,Rick and Morty,3,2017-04-01,False,False,https://www.themoviedb.org/tv/60625/season/3
+2018,film,Avengers: Infinity War,,2018-04-25,True,False,https://www.themoviedb.org/movie/299536
+2018,film,Black Panther,,2018-02-13,True,False,https://www.themoviedb.org/movie/284054
+2018,film,Deadpool 2,,2018-05-15,True,False,https://www.themoviedb.org/movie/383498
+2018,film,Bohemian Rhapsody,,2018-10-24,True,True,https://www.themoviedb.org/movie/424694
+2018,film,Spider-Man: Into the Spider-Verse,,2018-12-06,True,False,https://www.themoviedb.org/movie/324857
+2018,film,Venom,,2018-09-28,True,False,https://www.themoviedb.org/movie/335983
+2018,film,Ready Player One,,2018-03-28,True,False,https://www.themoviedb.org/movie/333339
+2018,film,A Quiet Place,,2018-04-03,True,False,https://www.themoviedb.org/movie/447332
+2018,film,Aquaman,,2018-12-07,True,False,https://www.themoviedb.org/movie/297802
+2018,film,Ant-Man and the Wasp,,2018-07-04,True,False,https://www.themoviedb.org/movie/363088
+2018,series,The Walking Dead,9,2018-10-07,False,False,https://www.themoviedb.org/tv/1402/season/9
+2018,series,Riverdale,3,2018-10-10,True,False,https://www.themoviedb.org/tv/69050/season/3
+2018,series,The Good Doctor,2,2018-09-23,False,False,https://www.themoviedb.org/tv/71712/season/2
+2018,series,The Big Bang Theory,12,2018-09-24,False,False,https://www.themoviedb.org/tv/1418/season/12
+2018,series,The Flash,5,2018-10-09,True,False,https://www.themoviedb.org/tv/60735/season/5
+2018,series,The Simpsons,30,2018-09-30,False,False,https://www.themoviedb.org/tv/456/season/30
+2018,series,Grey's Anatomy,15,2018-09-27,False,False,https://www.themoviedb.org/tv/1416/season/15
+2018,series,Elite,1,2018-10-05,False,False,https://www.themoviedb.org/tv/76669/season/1
+2018,series,The 100,5,2018-04-24,True,False,https://www.themoviedb.org/tv/48866/season/5
+2018,series,Supernatural,14,2018-10-11,False,False,https://www.themoviedb.org/tv/1622/season/14
+2019,film,Avengers: Endgame,,2019-04-24,True,False,https://www.themoviedb.org/movie/299534
+2019,film,Joker,,2019-10-01,True,False,https://www.themoviedb.org/movie/475557
+2019,film,Parasite,,2019-05-30,False,False,https://www.themoviedb.org/movie/496243
+2019,film,Spider-Man: Far From Home,,2019-06-28,True,False,https://www.themoviedb.org/movie/429617
+2019,film,Captain Marvel,,2019-03-06,True,False,https://www.themoviedb.org/movie/299537
+2019,film,Once Upon a Time... in Hollywood,,2019-07-24,False,False,https://www.themoviedb.org/movie/466272
+2019,film,Knives Out,,2019-11-27,True,False,https://www.themoviedb.org/movie/546554
+2019,film,1917,,2019-12-25,True,False,https://www.themoviedb.org/movie/530915
+2019,film,John Wick: Chapter 3 - Parabellum,,2019-05-15,True,False,https://www.themoviedb.org/movie/458156
+2019,film,Star Wars: The Rise of Skywalker,,2019-12-18,True,False,https://www.themoviedb.org/movie/181812
+2019,series,Game of Thrones,8,2019-04-14,True,False,https://www.themoviedb.org/tv/1399/season/8
+2019,series,Stranger Things,3,2019-07-04,True,False,https://www.themoviedb.org/tv/66732/season/3
+2019,series,Money Heist,2,2019-07-19,False,False,https://www.themoviedb.org/tv/71446/season/2
+2019,series,The Walking Dead,10,2019-10-06,False,False,https://www.themoviedb.org/tv/1402/season/10
+2019,series,Lucifer,4,2019-05-08,True,False,https://www.themoviedb.org/tv/63174/season/4
+2019,series,Riverdale,4,2019-10-09,False,False,https://www.themoviedb.org/tv/69050/season/4
+2019,series,The Boys,1,2019-07-25,True,False,https://www.themoviedb.org/tv/76479/season/1
+2019,series,The Good Doctor,3,2019-09-22,False,False,https://www.themoviedb.org/tv/71712/season/3
+2019,series,The Flash,6,2019-10-08,True,False,https://www.themoviedb.org/tv/60735/season/6
+2019,series,Rick and Morty,4,2019-11-10,False,False,https://www.themoviedb.org/tv/60625/season/4
+2020,film,Soul,,2020-12-25,True,False,https://www.themoviedb.org/movie/508442
+2020,film,Tenet,,2020-08-22,True,False,https://www.themoviedb.org/movie/577922
+2020,film,Birds of Prey (and the Fantabulous Emancipation of One Harley Quinn),,2020-02-05,False,False,https://www.themoviedb.org/movie/495764
+2020,film,Sonic the Hedgehog,,2020-02-12,True,False,https://www.themoviedb.org/movie/454626
+2020,film,365 Days,,2020-02-07,False,False,https://www.themoviedb.org/movie/664413
+2020,film,Wonder Woman 1984,,2020-12-16,True,False,https://www.themoviedb.org/movie/464052
+2020,film,Bad Boys for Life,,2020-01-15,True,False,https://www.themoviedb.org/movie/38700
+2020,film,Mulan,,2020-09-04,True,False,https://www.themoviedb.org/movie/337401
+2020,film,The Gentlemen,,2020-01-01,True,False,https://www.themoviedb.org/movie/522627
+2020,film,Enola Holmes,,2020-09-22,True,False,https://www.themoviedb.org/movie/497582
+2020,series,Lucifer,5,2020-08-20,True,False,https://www.themoviedb.org/tv/63174/season/5
+2020,series,The Boys,2,2020-09-03,True,False,https://www.themoviedb.org/tv/76479/season/2
+2020,series,The Good Doctor,4,2020-11-02,False,False,https://www.themoviedb.org/tv/71712/season/4
+2020,series,The Mandalorian,2,2020-10-30,True,False,https://www.themoviedb.org/tv/82856/season/2
+2020,series,The Simpsons,32,2020-09-27,False,False,https://www.themoviedb.org/tv/456/season/32
+2020,series,Grey's Anatomy,17,2020-11-12,False,False,https://www.themoviedb.org/tv/1416/season/17
+2020,series,The Umbrella Academy,2,2020-07-31,True,False,https://www.themoviedb.org/tv/75006/season/2
+2020,series,Elite,3,2020-03-13,False,False,https://www.themoviedb.org/tv/76669/season/3
+2020,series,The 100,7,2020-05-20,True,False,https://www.themoviedb.org/tv/48866/season/7
+2020,series,Sex Education,2,2020-01-17,True,False,https://www.themoviedb.org/tv/81356/season/2
+2021,film,Spider-Man: No Way Home,,2021-12-15,True,False,https://www.themoviedb.org/movie/634649
+2021,film,Dune,,2021-09-15,True,False,https://www.themoviedb.org/movie/438631
+2021,film,Black Widow,,2021-07-07,True,False,https://www.themoviedb.org/movie/497698
+2021,film,Venom: Let There Be Carnage,,2021-09-30,True,False,https://www.themoviedb.org/movie/580489
+2021,film,Zack Snyder's Justice League,,2021-03-18,False,False,https://www.themoviedb.org/movie/791373
+2021,film,Godzilla vs. Kong,,2021-03-24,True,False,https://www.themoviedb.org/movie/399566
+2021,film,Shang-Chi and the Legend of the Ten Rings,,2021-09-01,True,False,https://www.themoviedb.org/movie/566525
+2021,film,Encanto,,2021-11-24,True,False,https://www.themoviedb.org/movie/568124
+2021,film,Cruella,,2021-05-26,True,False,https://www.themoviedb.org/movie/337404
+2021,film,Free Guy,,2021-08-11,True,False,https://www.themoviedb.org/movie/550988
+2021,series,Money Heist,3,2021-09-03,False,False,https://www.themoviedb.org/tv/71446/season/3
+2021,series,The Walking Dead,11,2021-08-22,False,False,https://www.themoviedb.org/tv/1402/season/11
+2021,series,Squid Game,1,2021-09-17,False,False,https://www.themoviedb.org/tv/93405/season/1
+2021,series,Lucifer,6,2021-09-10,False,False,https://www.themoviedb.org/tv/63174/season/6
+2021,series,Riverdale,5,2021-01-20,False,False,https://www.themoviedb.org/tv/69050/season/5
+2021,series,Riverdale,6,2021-11-16,False,False,https://www.themoviedb.org/tv/69050/season/6
+2021,series,WandaVision,1,2021-01-14,False,False,https://www.themoviedb.org/tv/85271/season/1
+2021,series,The Good Doctor,5,2021-09-27,False,False,https://www.themoviedb.org/tv/71712/season/5
+2021,series,Loki,1,2021-06-09,False,False,https://www.themoviedb.org/tv/84958/season/1
+2021,series,The Flash,7,2021-03-02,False,False,https://www.themoviedb.org/tv/60735/season/7
+2021,series,The Flash,8,2021-11-16,False,False,https://www.themoviedb.org/tv/60735/season/8
+2021,series,Rick and Morty,5,2021-06-20,False,False,https://www.themoviedb.org/tv/60625/season/5
+2022,film,Avatar: The Way of Water,,2022-12-14,True,False,https://www.themoviedb.org/movie/76600
+2022,film,The Batman,,2022-03-01,True,False,https://www.themoviedb.org/movie/414906
+2022,film,Top Gun: Maverick,,2022-05-21,True,False,https://www.themoviedb.org/movie/361743
+2022,film,Doctor Strange in the Multiverse of Madness,,2022-05-04,True,False,https://www.themoviedb.org/movie/453395
+2022,film,Puss in Boots: The Last Wish,,2022-12-07,True,False,https://www.themoviedb.org/movie/315162
+2022,film,Thor: Love and Thunder,,2022-07-06,True,False,https://www.themoviedb.org/movie/616037
+2022,film,Everything Everywhere All at Once,,2022-03-24,True,False,https://www.themoviedb.org/movie/545611
+2022,film,Prey,,2022-08-05,True,False,https://www.themoviedb.org/movie/766507
+2022,film,Bullet Train,,2022-08-03,True,False,https://www.themoviedb.org/movie/718930
+2022,film,Black Panther: Wakanda Forever,,2022-11-09,True,False,https://www.themoviedb.org/movie/505642
+2022,series,Stranger Things,4,2022-05-27,True,False,https://www.themoviedb.org/tv/66732/season/4
+2022,series,The Boys,3,2022-06-02,True,False,https://www.themoviedb.org/tv/76479/season/3
+2022,series,The Good Doctor,6,2022-10-02,False,False,https://www.themoviedb.org/tv/71712/season/6
+2022,series,Rick and Morty,6,2022-09-04,False,False,https://www.themoviedb.org/tv/60625/season/6
+2022,series,Peaky Blinders,6,2022-02-27,False,False,https://www.themoviedb.org/tv/60574/season/6
+2022,series,Euphoria,2,2022-01-09,True,False,https://www.themoviedb.org/tv/85552/season/2
+2022,series,The Simpsons,34,2022-09-25,False,False,https://www.themoviedb.org/tv/456/season/34
+2022,series,Grey's Anatomy,19,2022-10-06,False,False,https://www.themoviedb.org/tv/1416/season/19
+2022,series,Wednesday,1,2022-11-23,True,False,https://www.themoviedb.org/tv/119051/season/1
+2022,series,The Umbrella Academy,3,2022-06-22,False,False,https://www.themoviedb.org/tv/75006/season/3
+2023,film,Oppenheimer,,2023-07-19,True,False,https://www.themoviedb.org/movie/872585
+2023,film,Barbie,,2023-07-19,True,False,https://www.themoviedb.org/movie/346698
+2023,film,The Super Mario Bros. Movie,,2023-04-05,True,False,https://www.themoviedb.org/movie/502356
+2023,film,Spider-Man: Across the Spider-Verse,,2023-05-31,True,False,https://www.themoviedb.org/movie/569094
+2023,film,Guardians of the Galaxy Vol. 3,,2023-05-03,True,False,https://www.themoviedb.org/movie/447365
+2023,film,John Wick: Chapter 4,,2023-03-21,True,False,https://www.themoviedb.org/movie/603692
+2023,film,Fast X,,2023-05-17,True,False,https://www.themoviedb.org/movie/385687
+2023,film,Ant-Man and the Wasp: Quantumania,,2023-02-15,True,False,https://www.themoviedb.org/movie/640146
+2023,film,Poor Things,,2023-12-07,True,False,https://www.themoviedb.org/movie/792307
+2023,film,Elemental,,2023-06-14,True,False,https://www.themoviedb.org/movie/976573
+2023,series,Riverdale,7,2023-03-29,False,False,https://www.themoviedb.org/tv/69050/season/7
+2023,series,Loki,2,2023-10-05,False,False,https://www.themoviedb.org/tv/84958/season/2
+2023,series,The Flash,9,2023-02-08,True,False,https://www.themoviedb.org/tv/60735/season/9
+2023,series,Rick and Morty,7,2023-10-15,False,False,https://www.themoviedb.org/tv/60625/season/7
+2023,series,The Mandalorian,3,2023-03-01,False,False,https://www.themoviedb.org/tv/82856/season/3
+2023,series,The Simpsons,35,2023-10-01,False,False,https://www.themoviedb.org/tv/456/season/35
+2023,series,Elite,7,2023-10-20,False,False,https://www.themoviedb.org/tv/76669/season/7
+2023,series,Sex Education,4,2023-09-21,True,False,https://www.themoviedb.org/tv/81356/season/4
+2023,series,Demon Slayer: Kimetsu no Yaiba,4,2023-04-09,False,False,https://www.themoviedb.org/tv/85937/season/4
+2023,series,The Last of Us,1,2023-01-15,True,False,https://www.themoviedb.org/tv/100088/season/1
+2024,film,Deadpool & Wolverine,,2024-07-24,True,False,https://www.themoviedb.org/movie/533535
+2024,film,Dune: Part Two,,2024-02-27,True,False,https://www.themoviedb.org/movie/693134
+2024,film,Inside Out 2,,2024-06-11,True,False,https://www.themoviedb.org/movie/1022789
+2024,film,The Wild Robot,,2024-09-12,True,False,https://www.themoviedb.org/movie/1184918
+2024,film,The Substance,,2024-09-18,False,False,https://www.themoviedb.org/movie/933260
+2024,film,Furiosa: A Mad Max Saga,,2024-05-22,True,False,https://www.themoviedb.org/movie/786892
+2024,film,Alien: Romulus,,2024-08-13,True,False,https://www.themoviedb.org/movie/945961
+2024,film,Godzilla x Kong: The New Empire,,2024-03-27,True,False,https://www.themoviedb.org/movie/823464
+2024,film,Gladiator II,,2024-11-13,True,False,https://www.themoviedb.org/movie/558449
+2024,film,Civil War,,2024-04-10,False,False,https://www.themoviedb.org/movie/929590
+2024,series,Squid Game,2,2024-12-26,True,False,https://www.themoviedb.org/tv/93405/season/2
+2024,series,The Boys,4,2024-06-13,True,False,https://www.themoviedb.org/tv/76479/season/4
+2024,series,The Good Doctor,7,2024-02-20,False,False,https://www.themoviedb.org/tv/71712/season/7
+2024,series,The Simpsons,36,2024-09-29,False,False,https://www.themoviedb.org/tv/456/season/36
+2024,series,Grey's Anatomy,20,2024-03-14,False,False,https://www.themoviedb.org/tv/1416/season/20
+2024,series,Grey's Anatomy,21,2024-09-26,False,False,https://www.themoviedb.org/tv/1416/season/21
+2024,series,The Umbrella Academy,4,2024-08-08,True,False,https://www.themoviedb.org/tv/75006/season/4
+2024,series,Elite,8,2024-07-26,False,False,https://www.themoviedb.org/tv/76669/season/8
+2024,series,Demon Slayer: Kimetsu no Yaiba,5,2024-05-12,False,False,https://www.themoviedb.org/tv/85937/season/5
+2024,series,House of the Dragon,2,2024-06-16,True,False,https://www.themoviedb.org/tv/94997/season/2
+2024,series,Cobra Kai,6,2024-07-18,True,False,https://www.themoviedb.org/tv/77169/season/6
+2025,film,Superman,,2025-07-09,True,False,https://www.themoviedb.org/movie/1061474
+2025,film,Sinners,,2025-04-16,True,False,https://www.themoviedb.org/movie/1233413
+2025,film,F1,,2025-06-25,True,False,https://www.themoviedb.org/movie/911430
+2025,film,Avatar: Fire and Ash,,2025-12-17,True,False,https://www.themoviedb.org/movie/83533
+2025,film,One Battle After Another,,2025-09-23,True,False,https://www.themoviedb.org/movie/1054867
+2025,film,The Gorge,,2025-02-13,False,False,https://www.themoviedb.org/movie/950396
+2025,film,Thunderbolts*,,2025-04-30,True,False,https://www.themoviedb.org/movie/986056
+2025,film,Weapons,,2025-08-04,True,False,https://www.themoviedb.org/movie/1078605
+2025,film,Mickey 17,,2025-02-28,True,False,https://www.themoviedb.org/movie/696506
+2025,film,The Fantastic 4: First Steps,,2025-07-23,False,False,https://www.themoviedb.org/movie/617126
+2025,series,Stranger Things,5,2025-11-26,True,False,https://www.themoviedb.org/tv/66732/season/5
+2025,series,Squid Game,3,2025-06-27,True,False,https://www.themoviedb.org/tv/93405/season/3
+2025,series,Rick and Morty,8,2025-05-25,False,False,https://www.themoviedb.org/tv/60625/season/8
+2025,series,The Simpsons,37,2025-09-28,False,False,https://www.themoviedb.org/tv/456/season/37
+2025,series,Grey's Anatomy,22,2025-10-09,False,False,https://www.themoviedb.org/tv/1416/season/22
+2025,series,Wednesday,2,2025-08-06,True,False,https://www.themoviedb.org/tv/119051/season/2
+2025,series,The Last of Us,2,2025-04-13,True,False,https://www.themoviedb.org/tv/100088/season/2
+2025,series,The Witcher,4,2025-10-30,True,False,https://www.themoviedb.org/tv/71912/season/4
+2025,series,Black Mirror,7,2025-04-10,True,False,https://www.themoviedb.org/tv/42009/season/7
+2025,series,INVINCIBLE,3,2025-02-06,True,False,https://www.themoviedb.org/tv/95557/season/3
+2026,film,Project Hail Mary,,2026-03-15,True,False,https://www.themoviedb.org/movie/687163
+2026,film,Obsession,,2026-05-13,True,False,https://www.themoviedb.org/movie/1339713
+2026,film,Spider-Man: Brand New Day,,2026-07-29,True,False,https://www.themoviedb.org/movie/969681
+2026,film,Michael,,2026-04-22,True,True,https://www.themoviedb.org/movie/936075
+2026,film,The Odyssey,,2026-07-15,True,False,https://www.themoviedb.org/movie/1368337
+2026,film,The Super Mario Galaxy Movie,,2026-04-01,True,False,https://www.themoviedb.org/movie/1226863
+2026,film,Backrooms,,2026-05-27,True,False,https://www.themoviedb.org/movie/1083381
+2026,film,Disclosure Day,,2026-06-10,True,False,https://www.themoviedb.org/movie/1275779
+2026,film,Lee Cronin's The Mummy,,2026-04-15,False,False,https://www.themoviedb.org/movie/1304313
+2026,film,Mortal Kombat II,,2026-05-06,True,False,https://www.themoviedb.org/movie/931285
+2026,series,The Boys,5,2026-04-08,True,False,https://www.themoviedb.org/tv/76479/season/5
+2026,series,Rick and Morty,9,2026-05-24,False,False,https://www.themoviedb.org/tv/60625/season/9
+2026,series,Euphoria,3,2026-04-11,True,False,https://www.themoviedb.org/tv/85552/season/3
+2026,series,The Simpsons,38,2026-09-27,False,False,https://www.themoviedb.org/tv/456/season/38
+2026,series,Grey's Anatomy,23,2026-10-15,False,False,https://www.themoviedb.org/tv/1416/season/23
+2026,series,House of the Dragon,3,2026-06-21,True,False,https://www.themoviedb.org/tv/94997/season/3
+2026,series,American Horror Story,13,2026-09-24,False,False,https://www.themoviedb.org/tv/1413/season/13
+2026,series,INVINCIBLE,4,2026-03-18,False,False,https://www.themoviedb.org/tv/95557/season/4
+2026,series,South Park,29,2026-09-16,False,False,https://www.themoviedb.org/tv/2190/season/29
+2026,series,Family Guy,24,2026-02-15,True,False,https://www.themoviedb.org/tv/1434/season/24

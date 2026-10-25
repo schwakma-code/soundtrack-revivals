@@ -1,0 +1,1060 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Soundtrack Revivals</title>
+<meta name="description" content="When a film or a TV series plays an old song, does the song come back? Older songs from the most-watched films and TV seasons since 2007, checked against the Billboard Hot 100.">
+<style>
+  html, body { margin: 0; background: #150c17; }
+  :root { --cds-dur-slow: .4s; --color-bad: #e5484d; }
+  body { -webkit-font-smoothing: antialiased; }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="dash-shim.js"></script>
+</head>
+<body>
+<div id="dash-root">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="fonts-sans.css">
+<style>
+  /* Layout: a 70s-revival page read top to bottom. Gradient masthead with daisies, a menu bar, a scroll story beside one sticky bubble figure,
+     then a vertical timeline to explore with a song card that stays in view, genre and decade charts, and the data sources. */
+  #dash-root { --dash-gutter: 0; }
+  .sr {
+    --sr-ink: #150c17; --sr-plum: #22142a; --sr-panel: #2a1a31; --sr-line: #4a3352; --sr-cream: #fbefdc; --sr-muted: #c4b0c4;
+    --sr-orange: #f45d25; --sr-violet: #8a6fe8; --sr-teal: #23a08f; --sr-magenta: #d93a73; --sr-mustard: #f2b134; --sr-rest: #54405c; --sr-grid: #34233b;
+    --sr-groovy: 'SR Shrikhand', 'Cooper Black', Georgia, serif;
+    --sr-mono: 'SR Space Mono', ui-monospace, 'Courier New', monospace;
+    --sr-body: 'SR Bricolage', system-ui, sans-serif;
+    --sr-poster: 'SR Anton', Impact, 'Arial Narrow', sans-serif;
+    --sr-pink: #ff4f9a; --sr-coral: #ff6f61;
+    --sr-gutter-l: max(16px, env(safe-area-inset-left, 0px)); --sr-gutter-r: max(16px, env(safe-area-inset-right, 0px));
+    color-scheme: dark; background-color: var(--sr-ink); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='%23ff4f9a' opacity='.16'%3E%3Ccircle cx='30' cy='22' r='7'/%3E%3Ccircle cx='30' cy='38' r='7'/%3E%3Ccircle cx='22' cy='30' r='7'/%3E%3Ccircle cx='38' cy='30' r='7'/%3E%3C/g%3E%3Ccircle cx='30' cy='30' r='5' fill='%23f2b134' opacity='.28'/%3E%3Cg fill='%23f45d25' opacity='.13'%3E%3Ccircle cx='90' cy='82' r='6'/%3E%3Ccircle cx='90' cy='98' r='6'/%3E%3Ccircle cx='82' cy='90' r='6'/%3E%3Ccircle cx='98' cy='90' r='6'/%3E%3C/g%3E%3Ccircle cx='90' cy='90' r='4' fill='%23fbefdc' opacity='.22'/%3E%3Ccircle cx='88' cy='26' r='2.5' fill='%23fbefdc' opacity='.18'/%3E%3Ccircle cx='26' cy='92' r='2.5' fill='%238a6fe8' opacity='.3'/%3E%3C/svg%3E"); background-size: 120px 120px;
+    color: var(--sr-cream); font-family: var(--sr-body); overflow-x: clip; position: relative;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M12 4 L26 1 L26 20' fill='none' stroke='%23150c17' stroke-width='5' stroke-linejoin='round'/%3E%3Cpath d='M12 4 L12 24' fill='none' stroke='%23150c17' stroke-width='5'/%3E%3Cellipse cx='8.5' cy='25' rx='5.5' ry='4.3' fill='%23150c17'/%3E%3Cellipse cx='22.5' cy='21' rx='5.5' ry='4.3' fill='%23150c17'/%3E%3Cpath d='M12 4 L26 1 L26 20' fill='none' stroke='%23f2b134' stroke-width='2.5' stroke-linejoin='round'/%3E%3Cpath d='M12 4 L12 24' fill='none' stroke='%23f2b134' stroke-width='2.5'/%3E%3Cellipse cx='8.5' cy='25' rx='4.2' ry='3.1' fill='%23f45d25'/%3E%3Cellipse cx='22.5' cy='21' rx='4.2' ry='3.1' fill='%23ff4f9a'/%3E%3C/svg%3E") 4 28, auto;
+  }
+  .sr :is(a, button, summary, circle[tabindex], tr) { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M12 4 L26 1 L26 20' fill='none' stroke='%23150c17' stroke-width='5' stroke-linejoin='round'/%3E%3Cpath d='M12 4 L12 24' fill='none' stroke='%23150c17' stroke-width='5'/%3E%3Cellipse cx='8.5' cy='25' rx='5.5' ry='4.3' fill='%23150c17'/%3E%3Cellipse cx='22.5' cy='21' rx='5.5' ry='4.3' fill='%23150c17'/%3E%3Cpath d='M12 4 L26 1 L26 20' fill='none' stroke='%23f2b134' stroke-width='2.5' stroke-linejoin='round'/%3E%3Cpath d='M12 4 L12 24' fill='none' stroke='%23f2b134' stroke-width='2.5'/%3E%3Cellipse cx='8.5' cy='25' rx='4.2' ry='3.1' fill='%23f45d25'/%3E%3Cellipse cx='22.5' cy='21' rx='4.2' ry='3.1' fill='%23ff4f9a'/%3E%3C/svg%3E") 4 28, pointer; }
+  .sr-sparkle { position: absolute; z-index: 20; pointer-events: none; font-size: var(--z, 14px); line-height: 1; color: var(--sc);
+    text-shadow: 0 0 6px var(--sc); transform: translate(-50%, -50%); animation: sr-sparkle .9s ease-out forwards; font-family: var(--sr-body); }
+  @keyframes sr-sparkle { to { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(.3) rotate(140deg); } }
+  .sr-wrap { max-width: 72rem; margin-inline: auto; padding-left: var(--sr-gutter-l); padding-right: var(--sr-gutter-r); }
+
+  /* Masthead */
+  .sr-hero { position: relative; overflow: hidden; isolation: isolate; background: linear-gradient(115deg, #c4561f 0%, #d93a73 40%, #6a3fd6 76%, #4c5fd9 100%); }
+  .sr-hero .sr-wrap { position: relative; z-index: 1; display: grid; gap: 1rem; padding-block: clamp(3rem, 9vw, 7rem) clamp(2.5rem, 7vw, 5rem); }
+  .sr-kicker { font-family: var(--sr-mono); font-size: .95rem; text-transform: uppercase; letter-spacing: .18em; color: #fff; opacity: .9; margin: 0; }
+  .sr-hero h1 { margin: 0; font-family: var(--sr-groovy); font-weight: 400; color: var(--sr-cream); line-height: .9; letter-spacing: .01em;
+    font-size: clamp(3rem, 12vw, 8.5rem); text-shadow: .04em .05em 0 #5a1d3d, .08em .1em 0 rgba(20, 8, 24, .55); text-wrap: balance; }
+  .sr-hero p.sr-sub { margin: 0; max-width: 36rem; font-size: clamp(1.1rem, 2vw, 1.35rem); line-height: 1.5; color: #fff; }
+  .sr-sticker { justify-self: start; display: inline-flex; align-items: center; gap: .5rem; font-family: var(--sr-mono); font-size: .75rem; text-transform: uppercase;
+    letter-spacing: .12em; color: var(--sr-ink); background: var(--sr-mustard); border-radius: 999px; padding: .4rem 1rem; font-size: .9rem; transform: rotate(-3deg); }
+  .sr-daisy { position: absolute; z-index: 0; width: var(--s); height: var(--s); left: var(--x); top: var(--y); color: var(--c); }
+  .sr-daisy svg { width: 100%; height: 100%; display: block; }
+
+  /* Menu bar */
+  .sr-nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: rgba(21, 12, 23, .92); backdrop-filter: blur(6px); border-bottom: 2px solid var(--sr-line); }
+  .sr-nav .sr-wrap { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; padding-block: .6rem; }
+  .sr-nav .sr-brand { font-family: var(--sr-groovy); font-size: 1.15rem; margin-right: auto; color: var(--sr-cream); text-decoration: none; }
+  .sr-nav a.sr-tab { font-family: var(--sr-mono); font-size: .9rem; text-transform: uppercase; letter-spacing: .1em; color: var(--sr-cream); text-decoration: none;
+    border: 2px solid var(--sr-line); border-radius: 999px; padding: .3rem .8rem; }
+  .sr-nav a.sr-tab:hover, .sr-nav a.sr-tab.sr-here { border-color: var(--sr-orange); color: var(--sr-orange); }
+  .sr-nav a.sr-tab.sr-data { background: var(--sr-mustard); border-color: var(--sr-mustard); color: var(--sr-ink); }
+
+  .sr-checker { height: 34px; background: repeating-conic-gradient(var(--sr-orange) 0 25%, var(--sr-mustard) 0 50%) 0 0 / 34px 34px; }
+  .sr-checker.sr-small { height: 18px; background-size: 18px 18px; opacity: .9; }
+  .sr-wave { display: block; width: 100%; height: 26px; }
+
+  /* Story */
+  .sr-story { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: clamp(1rem, 4vw, 3rem); padding-block: 2rem 4rem; }
+  .sr-step { min-height: 82vh; display: flex; align-items: center; }
+  .sr-step > div { border-radius: 24px; padding: 1.5rem 1.6rem; display: grid; gap: .8rem; border: 3px solid transparent;
+    background: linear-gradient(var(--sr-plum), var(--sr-plum)) padding-box, linear-gradient(120deg, var(--sr-line), var(--sr-line)) border-box;
+    box-shadow: 8px 8px 0 #ff4f9a33; transition: box-shadow .4s, background .4s; }
+  .sr-step.sr-on > div { background: linear-gradient(var(--sr-plum), var(--sr-plum)) padding-box, linear-gradient(120deg, var(--sr-orange), var(--sr-pink), var(--sr-violet)) border-box;
+    box-shadow: 8px 8px 0 #ff4f9a66, 14px 14px 0 #f45d2540; }
+  .sr-step.sr-spin > div { background: linear-gradient(115deg, #c4561f, var(--sr-orange) 30%, var(--sr-pink) 78%, #b13ad9) padding-box, linear-gradient(120deg, var(--sr-mustard), var(--sr-pink)) border-box; color: var(--sr-ink); }
+  .sr-step.sr-spin h2 { font-family: var(--sr-poster); text-transform: uppercase; font-size: clamp(2rem, 4.4vw, 3.2rem); line-height: .92; color: var(--sr-ink); }
+  .sr-step.sr-spin b { color: var(--sr-ink); background: var(--sr-mustard); padding: 0 .3rem; border-radius: 6px; }
+  .sr-step.sr-spin .sr-aside, .sr-step.sr-spin .sr-credit { color: #3a1426; }
+  .sr-step.sr-spin .sr-credit a { color: var(--sr-ink); text-decoration-color: var(--sr-ink); }
+  .sr-spinhead { display: flex; gap: 1rem; align-items: center; }
+  .sr-vinyl { flex: none; width: 5.5rem; aspect-ratio: 1; border-radius: 50%; position: relative; box-shadow: 0 6px 18px rgba(0,0,0,.35);
+    background: radial-gradient(circle, var(--sr-mustard) 0 17%, var(--sr-ink) 17.5% 19%, #1c1020 19.5% 100%); }
+  .sr-vinyl::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: repeating-radial-gradient(circle, transparent 0 3px, rgba(255,255,255,.06) 3px 4px); }
+  .sr-vinyl::after { content: ""; position: absolute; inset: 10%; border-radius: 50%; background: conic-gradient(from 20deg, transparent 0 10%, rgba(255,255,255,.14) 14%, transparent 20% 60%, rgba(255,255,255,.08) 64%, transparent 70%); }
+  .sr-wave { display: inline-flex; gap: 3px; align-items: center; height: 1.3rem; vertical-align: middle; margin-right: .4rem; }
+  .sr-wave i { display: block; width: 4px; border-radius: 2px; background: currentColor; }
+  .sr-kick { margin: 0; font-family: var(--sr-mono); font-size: .9rem; letter-spacing: .14em; text-transform: uppercase; }
+  .sr-step h2 { margin: 0; font-family: var(--sr-groovy); font-weight: 400; font-size: clamp(1.6rem, 3.4vw, 2.4rem); line-height: 1.05; text-wrap: balance; }
+  .sr-step p { margin: 0; line-height: 1.6; font-size: 1.08rem; max-width: 34rem; }
+  .sr-step .sr-aside { font-size: .95rem; color: var(--sr-muted); }
+  .sr-step b, .sr-sources b { font-family: var(--sr-mono); font-weight: 700; color: var(--sr-mustard); font-variant-numeric: tabular-nums; }
+  .sr-figure { margin: 0; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 4.5rem); align-self: start; height: min(84vh, 46rem); border-radius: 28px;
+    background: radial-gradient(120% 90% at 30% 20%, #3a1f3f 0%, var(--sr-plum) 55%, var(--sr-ink) 100%); border: 2px solid var(--sr-line); overflow: hidden; }
+  .sr-figure .sr-plot { position: absolute; inset: 0; }
+  .sr-figure { box-shadow: inset 0 0 0 10px #2a1931, 10px 10px 0 #ff4f9a44; }
+  .sr-box.sr-timeline { box-shadow: inset 0 0 0 8px #2a1931, 10px 10px 0 #ff4f9a33; }
+  .sr-figlabel { position: absolute; left: 1rem; top: .9rem; z-index: 2; font-family: var(--sr-mono); font-size: .9rem; text-transform: uppercase; letter-spacing: .12em; color: var(--sr-muted); }
+
+  /* Findings */
+  .sr-poster { margin: 0; font-family: var(--sr-poster); font-weight: 400; text-transform: uppercase; font-size: clamp(2.6rem, 7vw, 4.6rem); line-height: .95; color: #ffd84a; letter-spacing: .01em; }
+  .sr-quotes { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); }
+  .sr-quote { border: 2px solid var(--sr-cream); background: rgba(21, 12, 23, .85); padding: 1.2rem 1.3rem; display: grid; gap: 1rem; align-content: space-between; min-height: 11rem; }
+  .sr-quote p { margin: 0; font-size: 1.2rem; line-height: 1.45; }
+  .sr-quote p b { font-family: var(--sr-mono); color: var(--sr-mustard); }
+  .sr-quote .sr-credit { border-top: 2px solid var(--sr-cream); padding-top: .55rem; }
+  .sr-blob { position: absolute; width: 8rem; height: 8rem; color: var(--sr-coral); opacity: .85; pointer-events: none; z-index: 0; }
+  .sr-section > * { position: relative; z-index: 1; }
+
+  /* Sections */
+  .sr-section { padding-block: 3rem; display: grid; gap: 1.25rem; scroll-margin-top: 4rem; }
+  .sr-head2 { margin: 0; font-family: var(--sr-groovy); font-weight: 400; font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1; }
+  .sr-intro { margin: 0; max-width: 42rem; line-height: 1.6; font-size: 1.05rem; color: var(--sr-muted); }
+  .sr-controls { display: grid; gap: .9rem; background: var(--sr-plum); border: 2px solid var(--sr-line); border-radius: 22px; padding: 1rem 1.1rem; }
+  .sr-row { display: flex; flex-wrap: wrap; gap: .5rem .75rem; align-items: center; }
+  .sr-row > .sr-rowname { font-family: var(--sr-mono); font-size: .9rem; text-transform: uppercase; letter-spacing: .1em; color: var(--sr-muted); min-width: 8.5rem; }
+  .sr-controls input[type=search], .sr-controls select {
+    font-family: var(--sr-body); font-size: 1rem; color: var(--sr-cream); background: var(--sr-ink); border: 2px solid var(--sr-line); border-radius: 999px; padding: .45rem 1rem; }
+  .sr-controls input[type=search] { min-width: 0; width: min(100%, 24rem); }
+  .sr-controls input[type=search]::placeholder { color: var(--sr-muted); }
+  .sr-chip { font-family: var(--sr-body); font-size: .92rem; color: var(--sr-cream); background: var(--sr-ink); border: 2px solid var(--sr-line);
+    border-radius: 999px; padding: .3rem .85rem; cursor: pointer; }
+  .sr-chip:hover { border-color: var(--sr-orange); }
+  .sr-chip[aria-pressed=true] { background: var(--sr-orange); border-color: var(--sr-orange); color: #1d0b04; font-weight: 600; }
+  .sr-chip.sr-surprise { background: var(--sr-mustard); border-color: var(--sr-mustard); color: var(--sr-ink); font-weight: 600; }
+  .sr-chip.sr-quiet { background: none; font-family: var(--sr-mono); font-size: .85rem; text-transform: uppercase; letter-spacing: .1em; }
+  .sr :is(input, select, button, summary, a, tr):focus-visible { outline: 3px solid var(--sr-mustard); outline-offset: 2px; }
+  .sr circle:focus-visible { outline: none; stroke: var(--sr-mustard); }
+  .sr-legend { display: flex; flex-wrap: wrap; gap: .5rem 1.1rem; font-size: 1rem; color: var(--sr-muted); }
+  .sr-legend span { display: inline-flex; align-items: center; gap: .4rem; }
+  .sr-legend i { width: .85rem; height: .85rem; border-radius: 50%; display: inline-block; }
+  .sr-count { margin: 0; font-family: var(--sr-mono); font-size: .95rem; color: var(--sr-muted); }
+
+  .sr-explore { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: start; }
+  .sr-box { position: relative; background: var(--sr-plum); border: 2px solid var(--sr-line); border-radius: 22px; padding: 1rem; min-width: 0; }
+  .sr-box.sr-timeline { padding: 0; overflow: hidden; }
+  .sr-timeline .sr-plot { position: relative; }
+  .sr-detail { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 4.5rem); display: grid; gap: .65rem; max-height: calc(100vh - 6rem); overflow: auto; }
+  .sr-detail .sr-song a, .sr-detail .sr-meta a { color: inherit; text-decoration-color: var(--sr-mustard); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+  .sr-detail .sr-song a:hover, .sr-detail .sr-meta a:hover { color: var(--sr-mustard); }
+  a.sr-stat { text-decoration: none; color: inherit; border: 2px solid transparent; }
+  a.sr-stat:hover { border-color: var(--sr-mustard); }
+  a.sr-stat em { font-style: normal; font-family: var(--sr-mono); font-size: .75rem; color: var(--sr-cream); text-decoration: underline; text-decoration-color: var(--sr-mustard); }
+  .sr-srcrow { display: grid; gap: .35rem; background: var(--sr-ink); border-radius: 14px; padding: .6rem .7rem; }
+  .sr-srcrow > span { font-family: var(--sr-mono); font-size: .82rem; text-transform: uppercase; letter-spacing: .1em; color: var(--sr-mustard); }
+  .sr-detail .sr-song { margin: 0; font-family: var(--sr-groovy); font-weight: 400; font-size: 1.6rem; line-height: 1.1; }
+  .sr-detail .sr-meta { margin: 0; color: var(--sr-muted); line-height: 1.55; }
+  .sr-tags { display: flex; flex-wrap: wrap; gap: .45rem; padding-block: .2rem; }
+  .sr-tags .sr-pill:nth-child(odd) { transform: rotate(-3deg); }
+  .sr-tags .sr-pill:nth-child(even) { transform: rotate(2.5deg); }
+  .sr-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; }
+  .sr-stat { background: var(--sr-ink); border-radius: 14px; padding: .6rem .75rem; display: grid; gap: .1rem; }
+  .sr-stat span { font-family: var(--sr-mono); font-size: .82rem; text-transform: uppercase; letter-spacing: .1em; color: var(--sr-muted); }
+  .sr-stat strong { font-family: var(--sr-groovy); font-weight: 400; font-size: 1.7rem; color: var(--sr-mustard); }
+  .sr-run { position: relative; height: 11rem; }
+  .sr-links { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .sr-links a { font-family: var(--sr-mono); font-size: .88rem; color: var(--sr-cream); text-decoration: none; border: 2px solid var(--sr-line); border-radius: 999px; padding: .25rem .75rem; }
+  .sr-links a:hover { border-color: var(--sr-orange); color: var(--sr-orange); }
+  .sr-pill { display: inline-block; border-radius: 999px; padding: .1rem .65rem; border: 1px solid var(--sr-line); color: var(--sr-muted);
+    font-family: var(--sr-mono); font-size: .82rem; text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; }
+  .sr-pill[data-r=revival] { background: var(--sr-orange); border-color: var(--sr-orange); color: #1d0b04; font-weight: 700; }
+  .sr-pill[data-r=biopic] { background: var(--sr-teal); border-color: var(--sr-teal); color: #04140f; font-weight: 700; }
+  .sr-pill[data-r="minor return"], .sr-pill[data-r=rose] { border-color: var(--sr-violet); color: #cfc2ff; }
+  .sr-pill[data-r=kind], .sr-pill[data-r=genre] { border-color: var(--sr-mustard); color: var(--sr-mustard); }
+
+  /* Genre and decade charts: one row per group, bars on one shared scale. */
+  .sr-twin { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr)); }
+  .sr-bars { display: grid; gap: .35rem; }
+  .sr-bars h3 { margin: 0 0 .4rem; font-family: var(--sr-groovy); font-weight: 400; font-size: 1.5rem; }
+  .sr-bar { display: grid; grid-template-columns: 10.5rem minmax(0, 1fr) 3.8rem; gap: .6rem; align-items: center; width: 100%; text-align: left;
+    background: none; border: 2px solid transparent; border-radius: 14px; padding: .3rem .4rem; color: var(--sr-cream); font: inherit; cursor: pointer; }
+  .sr-bar:hover { border-color: var(--sr-line); }
+  .sr-bar[aria-pressed=true] { border-color: var(--sr-orange); background: var(--sr-ink); }
+  .sr-bar .sr-name { font-size: 1.05rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sr-bar .sr-track { display: flex; gap: 2px; height: 1.1rem; }
+  .sr-bar .sr-track i { display: block; height: 100%; border-radius: 6px; }
+  .sr-bar .sr-n { font-family: var(--sr-mono); font-size: .95rem; text-align: right; color: var(--sr-muted); font-variant-numeric: tabular-nums; }
+
+  .sr-more summary { cursor: pointer; display: inline-block; font-family: var(--sr-mono); font-size: .95rem; text-transform: uppercase; letter-spacing: .1em;
+    border: 2px solid var(--sr-line); border-radius: 999px; padding: .5rem 1.1rem; list-style: none; }
+  .sr-more summary::-webkit-details-marker { display: none; }
+  .sr-more[open] summary { border-color: var(--sr-orange); color: var(--sr-orange); margin-bottom: 1rem; }
+  .sr-tablebox { max-height: 30rem; overflow: auto; border: 2px solid var(--sr-line); border-radius: 18px; }
+  .sr-table { width: 100%; border-collapse: collapse; font-size: 1rem; font-variant-numeric: tabular-nums; }
+  .sr-table th { position: sticky; top: 0; background: var(--sr-plum); text-align: left; font-family: var(--sr-mono); font-weight: 400; font-size: .82rem;
+    text-transform: uppercase; letter-spacing: .06em; color: var(--sr-muted); padding: .6rem; border-bottom: 2px solid var(--sr-line); white-space: nowrap; }
+  .sr-table td { padding: .5rem .6rem; border-bottom: 1px solid var(--sr-grid); vertical-align: top; }
+  .sr-table .sr-num { text-align: right; font-family: var(--sr-mono); }
+  .sr-table tbody tr { cursor: pointer; }
+  .sr-table tbody tr:hover td { background: var(--sr-panel); }
+  .sr-table tbody tr[aria-selected=true] td { background: #3a2033; }
+
+  /* Data sources */
+  .sr-sourcegrid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); }
+  .sr-source { background: var(--sr-plum); border: 2px solid var(--sr-line); border-radius: 22px; padding: 1.1rem 1.2rem; display: grid; gap: .6rem; align-content: start; }
+  .sr-source h3 { margin: 0; font-family: var(--sr-groovy); font-weight: 400; font-size: 1.45rem; }
+  .sr-source p { margin: 0; line-height: 1.6; font-size: 1.02rem; color: var(--sr-muted); }
+  .sr-source .sr-links a { border-color: var(--sr-mustard); }
+  .sr-method { margin: 0; padding-left: 1.4rem; display: grid; gap: .7rem; line-height: 1.6; font-size: 1.08rem; max-width: 48rem; }
+  .sr-method li::marker { content: "✿  "; color: var(--sr-orange); }
+  .sr-sources h3.sr-sub3 { margin: 1rem 0 0; font-family: var(--sr-groovy); font-weight: 400; font-size: clamp(1.5rem, 3vw, 2rem); color: var(--sr-mustard); }
+
+  .sr-tip { position: absolute; z-index: 3; pointer-events: none; background: var(--sr-cream); color: var(--sr-ink); border-radius: 14px; padding: .5rem .75rem;
+    font-size: .95rem; line-height: 1.4; box-shadow: 4px 4px 0 var(--sr-magenta); max-width: 17rem; }
+  .sr-tip b { font-weight: 600; }
+  .sr-plot svg { display: block; width: 100%; height: 100%; }
+  .sr-plot svg text { font-family: var(--sr-mono); }
+  .sr-empty { margin: 0; color: var(--sr-muted); }
+  a.sr-src { color: inherit; text-decoration: underline; text-decoration-color: var(--sr-mustard); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+  a.sr-src::after { content: " ↗"; font-size: .75em; color: var(--sr-mustard); }
+  a.sr-src:hover { color: var(--sr-mustard); }
+  .sr-step.sr-spin a.sr-src { text-decoration-color: var(--sr-ink); }
+  .sr-step.sr-spin a.sr-src::after { color: var(--sr-ink); }
+  .sr-credit { margin: 0; font-family: var(--sr-mono); font-size: .85rem; line-height: 1.5; color: var(--sr-muted); }
+  .sr-credit a { color: var(--sr-cream); text-decoration-color: var(--sr-mustard); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  .sr-credit a:hover { color: var(--sr-mustard); }
+  .sr-figcredit { position: absolute; left: 1rem; right: 1rem; bottom: .7rem; z-index: 2; }
+  .sr-figure .sr-plot { bottom: 2.6rem; }
+  .sr-fail { display: flex; align-items: center; justify-content: center; gap: .4rem; height: 100%; min-height: 10rem; color: var(--sr-muted); font-size: .85rem; }
+  .sr-fail::before { content: ""; width: .375rem; height: .375rem; border-radius: 50%; background: var(--color-bad); }
+  .sr [data-dash-source-state=empty] { color: transparent; }
+  .sr [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .sr-daisy svg { animation: sr-spin var(--t, 40s) linear infinite; }
+    .sr-hero { background-size: 160% 100%; animation: sr-drift 16s ease-in-out infinite alternate; }
+    .sr-chip.sr-surprise:hover { animation: sr-wobble .5s ease-in-out; }
+    @keyframes sr-spin { to { transform: rotate(360deg); } }
+    @keyframes sr-drift { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+    @keyframes sr-wobble { 25% { transform: rotate(-4deg); } 75% { transform: rotate(4deg); } }
+    .sr-vinyl { animation: sr-spin 6s linear infinite; }
+    .sr-wave i { animation: sr-bounce 1.1s ease-in-out infinite; }
+    .sr-wave i:nth-child(2) { animation-delay: .15s; } .sr-wave i:nth-child(3) { animation-delay: .3s; } .sr-wave i:nth-child(4) { animation-delay: .45s; } .sr-wave i:nth-child(5) { animation-delay: .6s; }
+    @keyframes sr-bounce { 50% { transform: scaleY(.45); } }
+  }
+  @media (max-width: 52rem) {
+    .sr-story { grid-template-columns: minmax(0, 1fr); }
+    .sr-figure { grid-row: 1; height: 56vh; top: calc(env(safe-area-inset-top, 0px) + 3.6rem); z-index: 1; }
+    .sr-steps { grid-row: 2; position: relative; z-index: 2; }
+    .sr-step { min-height: 70vh; }
+    .sr-step > div { background: rgba(34, 20, 42, .95); }
+    .sr-explore { grid-template-columns: minmax(0, 1fr); }
+    .sr-detail { position: static; grid-row: 1; }
+    .sr-bar { grid-template-columns: 7rem minmax(0, 1fr) 2.6rem; }
+    .sr-nav .sr-brand { display: none; }
+  }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="sr-daisy" viewBox="-50 -50 100 100">
+      <g style="fill: currentColor">
+        <ellipse rx="11" ry="26" cy="-24"/><ellipse rx="11" ry="26" cy="-24" transform="rotate(45)"/>
+        <ellipse rx="11" ry="26" cy="-24" transform="rotate(90)"/><ellipse rx="11" ry="26" cy="-24" transform="rotate(135)"/>
+        <ellipse rx="11" ry="26" cy="-24" transform="rotate(180)"/><ellipse rx="11" ry="26" cy="-24" transform="rotate(225)"/>
+        <ellipse rx="11" ry="26" cy="-24" transform="rotate(270)"/><ellipse rx="11" ry="26" cy="-24" transform="rotate(315)"/>
+      </g>
+      <circle r="14" style="fill: #f2b134"/>
+      <circle r="14" style="fill: none; stroke: #150c17; stroke-width: 2.5"/>
+    </symbol>
+    <symbol id="sr-blob" viewBox="0 0 100 100">
+      <path style="fill: currentColor" d="M50 4c8 0 12 10 19 12s17-4 22 3-2 15 1 22 9 12 5 19-14 6-19 11-4 15-12 17-12-7-19-8-14 6-20 1-1-14-5-20-14-7-14-15 11-9 13-16-4-16 3-21 14 3 20 0 6-5 6-5z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="sr">
+  <header class="sr-hero" id="top">
+    <span class="sr-daisy" style="--s: 9rem; --x: 78%; --y: 8%; --c: #fbefdc; --t: 50s"><svg aria-hidden="true"><use href="#sr-daisy"/></svg></span>
+    <span class="sr-daisy" style="--s: 5rem; --x: 88%; --y: 58%; --c: #f2b134; --t: 30s"><svg aria-hidden="true"><use href="#sr-daisy"/></svg></span>
+    <span class="sr-daisy" style="--s: 3.5rem; --x: 66%; --y: 70%; --c: #ff9fc0; --t: 24s"><svg aria-hidden="true"><use href="#sr-daisy"/></svg></span>
+    <span class="sr-daisy" style="--s: 2.6rem; --x: 4%; --y: 6%; --c: #fbefdc; --t: 20s"><svg aria-hidden="true"><use href="#sr-daisy"/></svg></span>
+    <div class="sr-wrap">
+      <p class="sr-kicker">Films and TV series × the Billboard Hot 100 · 2007 to now</p>
+      <h1>Soundtrack Revivals</h1>
+      <p class="sr-sub">When a film or a TV series plays an old song, does the song come back? Every older song on the soundtracks of the most-watched films and TV seasons since 2007, checked against the charts.</p>
+    </div>
+  </header>
+
+  <nav class="sr-nav" aria-label="Sections">
+    <div class="sr-wrap">
+      <a class="sr-brand" href="#top">Soundtrack Revivals</a>
+      <a class="sr-tab" href="#story">Story</a>
+      <a class="sr-tab" href="#findings">Findings</a>
+      <a class="sr-tab" href="#explore">Explore</a>
+      <a class="sr-tab" href="#genres">Genres</a>
+      <a class="sr-tab sr-data" href="#sources">How it's counted</a>
+    </div>
+  </nav>
+  <div class="sr-checker" aria-hidden="true"></div>
+
+  <div class="sr-wrap sr-story" id="story">
+    <div class="sr-steps">
+      <section class="sr-step" data-step="all" id="step-all"><div>
+        <h2>Old songs in new hits</h2>
+        <p>Every year since 2007, I took the 10 most-watched <a class="sr-src" href="https://developer.themoviedb.org/reference/discover-movie" target="_blank" rel="noopener">films</a> and the 10 most-watched <a class="sr-src" href="https://developer.themoviedb.org/reference/discover-tv" target="_blank" rel="noopener">TV series seasons</a>. Their <a class="sr-src" href="https://musicbrainz.org/doc/MusicBrainz_API" target="_blank" rel="noopener">soundtracks</a> used <b data-source="summary" data-field="older" data-row="0">—</b> songs that were already at least 10 years old.</p>
+        <p class="sr-aside">Each bubble is one of those songs. Click one to see where its data comes from.</p>
+      </div></section>
+      <section class="sr-step" data-step="revivals" id="step-revivals"><div>
+        <h2>Only a few came back</h2>
+        <p>A song counts as a <em>revival</em> if it was not in <a class="sr-src" href="https://github.com/utdata/rwd-billboard-data/blob/main/data-out/hot-100-current.csv" target="_blank" rel="noopener">Billboard’s Hot 100</a> top 50 in the year before the film or series came out, then made the top 50 within 3 months after.</p>
+        <p><b data-source="summary" data-field="revivals" data-row="0">—</b> songs did. <b data-source="summary" data-field="revivals_biopics" data-row="0">—</b> of them come from music biopics, films about the musician like <a class="sr-src" href="https://www.themoviedb.org/movie/936075" target="_blank" rel="noopener"><i>Michael</i></a>, in teal. Only <b data-source="summary" data-field="revivals_no_biopics" data-row="0">—</b>, in orange, came back because a film or series placed them in a scene.</p>
+        <p class="sr-aside">The bigger the bubble, the higher the song climbed.</p>
+      </div></section>
+      <section class="sr-step" data-step="years" id="step-years"><div>
+        <h2>Every revival is recent</h2>
+        <p>Read down by year. Before 2018, these <a class="sr-src" href="https://developer.themoviedb.org/reference/discover-movie" target="_blank" rel="noopener">films</a> and <a class="sr-src" href="https://developer.themoviedb.org/reference/discover-tv" target="_blank" rel="noopener">series</a> used <b data-source="summary" data-field="older_before_2018" data-row="0">—</b> older songs, and <b data-source="summary" data-field="revivals_before_2018" data-row="0">—</b> of them came back.</p>
+        <p>One reason: since 2013, the <a class="sr-src" href="https://github.com/utdata/rwd-billboard-data/blob/main/data-out/hot-100-current.csv" target="_blank" rel="noopener">Hot 100</a> counts streams. When an episode sends millions of people to play a song, it can jump onto the chart the same week.</p>
+      </div></section>
+      <section class="sr-step sr-spin" data-step="spotlight" id="step-spotlight"><div>
+        <div class="sr-spinhead">
+          <div class="sr-vinyl" role="img" aria-label="A spinning record"></div>
+          <div>
+            <p class="sr-kick"><span class="sr-wave" aria-hidden="true"><i style="height:40%"></i><i style="height:90%"></i><i style="height:60%"></i><i style="height:100%"></i><i style="height:50%"></i></span>Spotlight</p>
+            <h2>Now spinning: Running Up That Hill</h2>
+          </div>
+        </div>
+        <p>Kate Bush's song first reached <b data-source="spotlight" data-field="original_peak" data-row="0">—</b> on the <a class="sr-src" href="https://www.billboard.com/charts/hot-100/1985-11-30/" target="_blank" rel="noopener">Hot 100 of November 30</a>, <b data-source="spotlight" data-field="original_peak_week" data-row="0">—</b>.</p>
+        <p>After the TV series <a class="sr-src" href="https://www.themoviedb.org/tv/66732/season/4" target="_blank" rel="noopener"><i>Stranger Things</i></a> put it in a key scene of season 4, it climbed to <b data-source="spotlight" data-field="best_after" data-row="0">—</b>, its highest spot ever, on the <a class="sr-src" href="https://www.billboard.com/charts/hot-100/2022-07-30/" target="_blank" rel="noopener">Hot 100 of July 30, 2022</a>.</p>
+        <p class="sr-aside">The line in the picture is its chart position each week, from a year before the season to six months after.</p>
+      </div></section>
+    </div>
+    <figure class="sr-figure" id="story-figure" data-source="older_songs chart_runs" aria-label="Story figure">
+      <span class="sr-figlabel" id="story-label">Older songs</span>
+      <div class="sr-plot" id="story-plot"></div>
+      <figcaption class="sr-credit sr-figcredit" id="story-credit"></figcaption>
+    </figure>
+  </div>
+
+  <section class="sr-wrap sr-section" id="findings">
+    <svg class="sr-blob" style="right: 0; top: 1rem" aria-hidden="true"><use href="#sr-blob"/></svg>
+    <h2 class="sr-poster">What the charts say</h2>
+    <div class="sr-quotes">
+      <div class="sr-quote"><p>“<b data-source="findings" data-field="never_after" data-row="0">—</b> of <b data-source="findings" data-field="older" data-row="0">—</b> older songs never reached the <a class="sr-src" href="https://github.com/utdata/rwd-billboard-data/blob/main/data-out/hot-100-current.csv" target="_blank" rel="noopener">Hot 100</a> after their film or TV series came out.”</p></div>
+      <div class="sr-quote"><p>“<b data-source="findings" data-field="revivals_since_2018" data-row="0">—</b> of <b data-source="findings" data-field="revivals" data-row="0">—</b> revivals came in 2018 or later, after <a class="sr-src" href="https://github.com/utdata/rwd-billboard-data/blob/main/data-out/hot-100-current.csv" target="_blank" rel="noopener">the chart</a> began counting streams.”</p></div>
+      <div class="sr-quote"><p>“<b data-source="findings" data-field="top_older_genre" data-row="0">—</b> is the <a class="sr-src" href="https://musicbrainz.org/doc/Genre" target="_blank" rel="noopener">genre</a> films and series use most (<b data-source="findings" data-field="top_older_count" data-row="0">—</b> songs), but <b data-source="findings" data-field="top_revival_count" data-row="0">—</b> of the revivals are <b data-source="findings" data-field="top_revival_genre" data-row="0">—</b>.”</p></div>
+    </div>
+  </section>
+
+  <svg class="sr-wave" viewBox="0 0 1200 26" preserveAspectRatio="none" aria-hidden="true"><path d="M0 13 Q 50 0 100 13 T 200 13 T 300 13 T 400 13 T 500 13 T 600 13 T 700 13 T 800 13 T 900 13 T 1000 13 T 1100 13 T 1200 13" style="fill: none; stroke: #f45d25; stroke-width: 3"/></svg>
+
+  <section class="sr-wrap sr-section" id="explore">
+    <svg class="sr-blob" style="right: 1rem; top: 1.5rem; width: 6rem; height: 6rem; color: var(--sr-mustard); opacity: .5" aria-hidden="true"><use href="#sr-blob"/></svg>
+    <h2 class="sr-head2">Dig through the crate</h2>
+    <p class="sr-intro">Every older song from the <a class="sr-src" href="https://developer.themoviedb.org/reference/discover-movie" target="_blank" rel="noopener">films</a> and <a class="sr-src" href="https://developer.themoviedb.org/reference/discover-tv" target="_blank" rel="noopener">TV series</a>, found on their <a class="sr-src" href="https://musicbrainz.org/doc/MusicBrainz_API" target="_blank" rel="noopener">soundtracks</a> and checked against the <a class="sr-src" href="https://github.com/utdata/rwd-billboard-data/blob/main/data-out/hot-100-current.csv" target="_blank" rel="noopener">Hot 100</a>. Click a bubble: on its card, the song links to MusicBrainz, the film or series to TMDb, and each chart number to that week's Billboard chart.</p>
+    <div class="sr-controls" id="filters">
+      <div class="sr-row">
+        <label class="sr-rowname" for="sr-q">Search</label>
+        <input id="sr-q" type="search" placeholder="Kate Bush, Stranger Things, disco…" autocomplete="off">
+        <button class="sr-chip sr-surprise" id="sr-surprise" type="button">✿ Surprise me</button>
+        <button class="sr-chip sr-quiet" id="sr-reset" type="button">Reset</button>
+      </div>
+      <div class="sr-row" role="group" aria-label="View">
+        <span class="sr-rowname">View</span>
+        <button class="sr-chip" type="button" data-view="speaker">◉ Speaker</button>
+        <button class="sr-chip" type="button" data-view="timeline">☰ Timeline by year</button>
+      </div>
+      <div class="sr-row" role="group" aria-label="Films or TV series">
+        <span class="sr-rowname">Show</span>
+        <button class="sr-chip" type="button" data-kind="all">Films and TV series</button>
+        <button class="sr-chip" type="button" data-kind="film">Films</button>
+        <button class="sr-chip" type="button" data-kind="series">TV series</button>
+        <button class="sr-chip" type="button" id="sr-biopics" aria-pressed="true">Include biopics</button>
+      </div>
+      <div class="sr-row" role="group" aria-label="What counts as a revival">
+        <span class="sr-rowname">Revival means</span>
+        <button class="sr-chip" type="button" data-top="10">Top 10</button>
+        <button class="sr-chip" type="button" data-top="20">Top 20</button>
+        <button class="sr-chip" type="button" data-top="40">Top 40</button>
+        <button class="sr-chip" type="button" data-top="50">Top 50</button>
+        <button class="sr-chip" type="button" data-top="100">Anywhere on the Hot 100</button>
+      </div>
+      <div class="sr-row" role="group" aria-label="Genre" id="genre-chips" data-source="older_songs"><span class="sr-rowname">Genre</span></div>
+      <div class="sr-row" role="group" aria-label="Decade the song came out" id="decade-chips" data-source="older_songs"><span class="sr-rowname">Song from the</span></div>
+    </div>
+    <div class="sr-legend">
+      <span><i style="background: #f45d25"></i>Revival from a scene</span>
+      <span><i style="background: #23a08f"></i>Revival from a music biopic</span>
+      <span><i style="background: #8a6fe8"></i>Back on the chart, below the cutoff</span>
+      <span><i style="background: #54405c"></i>No revival</span>
+    </div>
+    <p class="sr-count" id="count"></p>
+    <div class="sr-explore">
+      <div class="sr-box sr-timeline" id="timeline" data-source="older_songs"><div class="sr-plot" id="timeline-plot"></div></div>
+      <div class="sr-box sr-detail" id="detail" data-source="older_songs chart_runs"></div>
+    </div>
+    <details class="sr-more" id="every-song">
+      <summary>See every song as a table</summary>
+      <div class="sr-tablebox">
+        <table class="sr-table" id="songs-table" data-source="older_songs" data-row-key="song_id">
+          <thead><tr>
+            <th data-field="song">Song</th>
+            <th data-field="artist">Artist</th>
+            <th data-field="song_year" class="sr-num">Song year</th>
+            <th data-field="genre_family">Genre</th>
+            <th data-field="title">Film or TV series</th>
+            <th data-field="event_date">Released</th>
+            <th data-field="original_peak" class="sr-num">First time around</th>
+            <th data-field="best_after" class="sr-num">After the film or series</th>
+            <th data-field="result">Result</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </details>
+  </section>
+
+  <div class="sr-checker sr-small" aria-hidden="true"></div>
+
+  <section class="sr-wrap sr-section" id="genres">
+    <h2 class="sr-head2">What kind of songs come back?</h2>
+    <p class="sr-intro">Older songs by <a class="sr-src" href="https://musicbrainz.org/doc/Genre" target="_blank" rel="noopener">genre</a> and by the <a class="sr-src" href="https://musicbrainz.org/doc/Recording" target="_blank" rel="noopener">decade they first came out</a>, with revivals from the <a class="sr-src" href="https://github.com/utdata/rwd-billboard-data/blob/main/data-out/hot-100-current.csv" target="_blank" rel="noopener">Hot 100</a>, following the filters above. Orange and teal are the revivals. Click a row to filter everything by it; click again to clear.</p>
+    <div class="sr-twin">
+      <div class="sr-box sr-bars" id="genre-bars" data-source="older_songs"><h3>By genre</h3></div>
+      <div class="sr-box sr-bars" id="decade-bars" data-source="older_songs"><h3>By decade of the song</h3></div>
+    </div>
+  </section>
+
+  <div class="sr-checker sr-small" aria-hidden="true"></div>
+
+  <section class="sr-wrap sr-section sr-sources" id="sources">
+    <h2 class="sr-head2">How it's counted</h2>
+    <ul class="sr-method">
+      <li>The titles: for each year since 2007, the 10 <a class="sr-src" href="https://developer.themoviedb.org/reference/discover-movie" target="_blank" rel="noopener">films</a> and the 10 scripted <a class="sr-src" href="https://developer.themoviedb.org/reference/discover-tv" target="_blank" rel="noopener">TV series</a> with a season beginning that year that the most TMDb users have rated. <b data-source="summary" data-field="with_album" data-row="0">—</b> of the <b data-source="summary" data-field="titles" data-row="0">—</b> titles have a <a class="sr-src" href="https://musicbrainz.org/doc/MusicBrainz_API" target="_blank" rel="noopener">soundtrack album on MusicBrainz</a>; the rest can't be counted.</li>
+      <li>An older song came out at least 10 years before the film or TV season it plays in, by its <a class="sr-src" href="https://musicbrainz.org/doc/Recording" target="_blank" rel="noopener">earliest release on MusicBrainz</a>. Score albums, remixes and singles are left out.</li>
+      <li>A revival: not in the <a class="sr-src" href="https://github.com/utdata/rwd-billboard-data/blob/main/data-out/hot-100-current.csv" target="_blank" rel="noopener">Billboard Hot 100</a>'s top 50 (or the cutoff you pick) in the year before the release, then inside it in the 3 months (12 weeks) after. The Hot 100 data is every weekly chart since 1958, <a class="sr-src" href="https://github.com/utdata/rwd-billboard-data" target="_blank" rel="noopener">collected by a University of Texas course</a>.</li>
+      <li>Music biopics are films about the artist: <a class="sr-src" href="https://www.themoviedb.org/movie/424694" target="_blank" rel="noopener"><i>Bohemian Rhapsody</i></a> and <a class="sr-src" href="https://www.themoviedb.org/movie/936075" target="_blank" rel="noopener"><i>Michael</i></a>. They are shown in teal, apart from songs placed in a scene.</li>
+      <li>Genres are the ones <a class="sr-src" href="https://musicbrainz.org/doc/Genre" target="_blank" rel="noopener">MusicBrainz users voted for most</a> on the song, or on the artist when the song has none, grouped into broad families.</li>
+      <li>Each song card links to its own pages, and to <a class="sr-src" href="https://trends.google.com/trends/" target="_blank" rel="noopener">Google Trends</a> for its YouTube search interest around the release.</li>
+      <li>The Hot 100 is a US chart, and it began counting streams in 2012 and 2013, so earlier years are measured differently.</li>
+    </ul>
+  </section>
+  <div class="sr-checker" aria-hidden="true"></div>
+</div>
+
+<script>
+{
+  dash.calc('summary', {
+    inputs: ['older_songs', 'titles'],
+    title: 'Story counts',
+    description: 'Older songs; top-50 revivals, from biopics and not; older songs and revivals in titles before 2018; titles with a soundtrack album.',
+    fn: (older_songs, titles) => [{
+      older: older_songs.length,
+      revivals: older_songs.filter((s) => s.result === 'revival').length,
+      revivals_biopics: older_songs.filter((s) => s.result === 'revival' && s.biopic === 'True').length,
+      revivals_no_biopics: older_songs.filter((s) => s.result === 'revival' && s.biopic !== 'True').length,
+      older_before_2018: older_songs.filter((s) => +s.year < 2018).length,
+      revivals_before_2018: older_songs.filter((s) => +s.year < 2018 && s.result === 'revival').length,
+      titles: titles.length,
+      with_album: titles.filter((t) => t.has_album === 'True').length,
+    }],
+  });
+  dash.calc('findings', {
+    inputs: ['older_songs'],
+    title: 'Findings',
+    description: 'Older songs that never charted after the release; top-50 revivals since 2018; the genre used most and the genre with most revivals.',
+    fn: (older_songs) => {
+      const revivals = older_songs.filter((s) => s.result === 'revival');
+      const most = (rows) => d3.rollups(rows, (v) => v.length, (s) => s.genre_family || 'Unknown').filter(([g]) => g !== 'Unknown').sort((a, b) => b[1] - a[1])[0] || ['—', 0];
+      const [olderGenre, olderCount] = most(older_songs);
+      const [revivalGenre, revivalCount] = most(revivals);
+      return [{
+        older: older_songs.length,
+        never_after: older_songs.filter((s) => !s.best_after).length,
+        revivals: revivals.length,
+        revivals_since_2018: revivals.filter((s) => +s.year >= 2018).length,
+        top_older_genre: olderGenre, top_older_count: olderCount,
+        top_revival_genre: revivalGenre.toLowerCase(), top_revival_count: revivalCount,
+      }];
+    },
+  });
+  dash.calc('spotlight', {
+    inputs: ['older_songs'],
+    title: 'Kate Bush spotlight',
+    description: 'The row for Running Up That Hill in Stranger Things.',
+    fn: (older_songs) => older_songs.filter((s) => s.song.startsWith('Running Up That Hill') && s.title === 'Stranger Things').slice(0, 1),
+  });
+
+  // Shared helpers for every script on the page.
+  const DEFAULTS = { q: '', kind: 'all', biopics: true, song: null, top: 50, genre: null, decade: null, view: 'speaker' };
+  window.sr = {
+    params: () => ({ ...DEFAULTS, ...dash.params() }),
+    result(s, cut) {
+      const before = s.best_before ? +s.best_before : null;
+      const after = s.best_after ? +s.best_after : null;
+      if (after === null) return before === null ? 'absent' : 'no gain';
+      if (after <= cut && (before === null || before > cut)) return 'revival';
+      if (before === null) return 'minor return';
+      return after < before ? 'rose' : 'no gain';
+    },
+    // The bubble's color group: a revival is split by whether it came from a biopic.
+    group(s, cut) {
+      const r = sr.result(s, cut);
+      return r === 'revival' ? (s.biopic === 'True' ? 'biopic' : 'revival') : r;
+    },
+    rank: { revival: 0, biopic: 1, 'minor return': 2, rose: 3, 'no gain': 4, absent: 5 },
+    color: { revival: '#f45d25', biopic: '#23a08f', 'minor return': '#8a6fe8', rose: '#8a6fe8', 'no gain': '#54405c', absent: '#54405c' },
+    decade: (s) => (s.song_year ? Math.floor(+s.song_year / 10) * 10 + 's' : 'Unknown'),
+    genre: (s) => s.genre_family || 'Unknown',
+    label: (s) => s.title + (s.season ? `, season ${s.season}` : ''),
+    kindName: (s) => (s.kind === 'series' ? 'TV series' : 'Film'),
+    day: (iso) => (iso ? d3.utcFormat('%b %-d, %Y')(new Date(iso)) : '—'),
+    reduced: () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    // Whether a song passes every filter except the one named in `skip`.
+    matches(s, p, skip) {
+      const needle = (p.q || '').trim().toLowerCase();
+      return (p.kind === 'all' || s.kind === p.kind) && (p.biopics || s.biopic !== 'True') &&
+        (skip === 'genre' || !p.genre || sr.genre(s) === p.genre) &&
+        (skip === 'decade' || !p.decade || sr.decade(s) === p.decade) &&
+        (!needle || [s.song, s.artist, s.title, s.genre || '', s.genre_family || ''].some((v) => v.toLowerCase().includes(needle)));
+    },
+    // A bubble field that moves between layouts. Bubbles keep their place between draws.
+    // 'cluster' gathers every song in the middle; 'years' gives each year a row, read top to bottom.
+    field(host) {
+      const nodes = new Map();
+      return function draw(rows, opts) {
+        const width = host.clientWidth || 600;
+        const years = d3.range(2007, (d3.max(rows, (s) => +s.year) || 2026) + 1);
+        const height = opts.rowHeight ? 40 + years.length * opts.rowHeight + 20 : (host.clientHeight || 500);
+        if (opts.rowHeight) host.style.height = height + 'px';
+        let svg = d3.select(host).select('svg.sr-bubbles');
+        if (svg.empty() || +svg.attr('data-w') !== width || +svg.attr('data-h') !== height) {
+          host.querySelectorAll('svg').forEach((el) => el.remove());
+          svg = d3.select(host).insert('svg', ':first-child').attr('class', 'sr-bubbles').attr('viewBox', `0 0 ${width} ${height}`)
+            .attr('data-w', width).attr('data-h', height).attr('role', 'img');
+          svg.append('g').attr('class', 'sr-axis');
+          svg.append('g').attr('class', 'sr-dots');
+          svg.append('g').attr('class', 'sr-leaders');
+          svg.append('g').attr('class', 'sr-labels');
+        }
+        svg.attr('aria-label', opts.aria || 'Older songs as bubbles');
+        const vertical = opts.layout === 'years';
+        const speaker = opts.layout === 'speaker' || opts.layout === 'cluster';
+        const pad = { top: 40, right: 14, bottom: 16, left: vertical ? 54 : 14 };
+        const y = d3.scaleBand(years, [pad.top, height - pad.bottom]).padding(0.08);
+        const scale = vertical && opts.rowHeight ? 1 : Math.max(.7, Math.min(1, Math.sqrt((width * height) / 260000)));
+        const data = rows.map((s) => {
+          const prev = nodes.get(s.song_id) || { x: width / 2 + (Math.random() - .5) * 40, y: height / 2 + (Math.random() - .5) * 40 };
+          const kind = opts.highlight ? sr.group(s, opts.cut) : 'plain';
+          const after = s.best_after ? +s.best_after : 100;
+          const big = kind === 'revival' || kind === 'biopic';
+          const size = big ? 10 + (opts.cut - Math.min(after, opts.cut)) / Math.max(1, opts.cut) * 14 : kind === 'minor return' ? 7 : 4.5;
+          const dim = opts.match ? !opts.match(s) : false;
+          let r = (dim ? 3 : size) * scale;
+          if (vertical) r = Math.min(r, (opts.rowHeight || y.bandwidth()) * .48);
+          return { s, kind, dim, r: Math.max(2.5, r), x: prev.x, y: prev.y, x0: prev.x, y0: prev.y };
+        });
+        const midX = (pad.left + width - pad.right) / 2;
+        const midY = speaker ? pad.top + (height - pad.top - pad.bottom) * .6 : (height + pad.top) / 2;
+        const pull = (n) => (speaker ? (n.r > 8 ? .22 : .07) : .06);
+        if (speaker) {
+          // Start every bubble on a sunflower spiral, biggest in the middle, so the packing comes out even.
+          data.sort((a, b) => b.r - a.r);
+          data.forEach((n, i) => {
+            if (nodes.has(n.s.song_id)) return;
+            const a = i * 2.39996, d = Math.sqrt(i + .5) * 7;
+            n.x = n.x0 = midX + Math.cos(a) * d; n.y = n.y0 = midY + Math.sin(a) * d;
+          });
+        }
+        const sim = d3.forceSimulation(data)
+          .force('x', d3.forceX(midX).strength(vertical ? .02 : pull))
+          .force('y', d3.forceY((n) => (vertical ? y(+n.s.year) + y.bandwidth() / 2 : midY)).strength(vertical ? .6 : pull))
+          .force('collide', d3.forceCollide((n) => n.r + 1.5).iterations(3))
+          .stop();
+        for (let i = 0; i < 300; i++) sim.tick();
+        data.forEach((n) => {
+          n.x = Math.max(pad.left + n.r, Math.min(width - pad.right - n.r, n.x));
+          n.y = Math.max(pad.top + n.r, Math.min(height - pad.bottom - n.r, n.y));
+          nodes.set(n.s.song_id, { x: n.x, y: n.y });
+        });
+
+        const axis = svg.select('.sr-axis');
+        axis.selectAll('*').remove();
+        if (speaker && data.length) {
+          const R = d3.max(data, (n) => Math.hypot(n.x - midX, n.y - midY) + n.r) + 8;
+          axis.append('circle').attr('cx', midX).attr('cy', midY).attr('r', R + 12).style('fill', 'var(--sr-ink)').style('stroke', 'var(--sr-line)').attr('stroke-width', 5);
+          axis.append('circle').attr('cx', midX).attr('cy', midY).attr('r', R + 3).style('fill', 'none').style('stroke', 'var(--sr-mustard)').attr('stroke-width', 2).attr('stroke-dasharray', '3 7');
+          const ty = midY - R - 12 - 44;
+          if (ty - 30 > 8) {
+            [30, 22, 14, 6].forEach((r, i) => axis.append('circle').attr('cx', midX).attr('cy', ty).attr('r', r)
+              .style('fill', i % 2 ? 'var(--sr-plum)' : 'var(--sr-ink)').style('stroke', i === 0 ? 'var(--sr-line)' : 'var(--sr-grid)').attr('stroke-width', i === 0 ? 5 : 1.5));
+            axis.append('circle').attr('cx', midX).attr('cy', ty).attr('r', 3).style('fill', 'var(--sr-mustard)');
+          }
+        }
+        if (vertical) {
+          const every = Math.ceil(years.length / Math.max(1, Math.floor((height - pad.top) / 20)));
+          axis.selectAll('line').data(years).join('line').attr('x1', pad.left).attr('x2', width - pad.right)
+            .attr('y1', (yr) => y(yr) + y.bandwidth()).attr('y2', (yr) => y(yr) + y.bandwidth()).style('stroke', 'var(--sr-grid)');
+          axis.selectAll('text').data(years.filter((yr, i) => i % every === 0)).join('text')
+            .attr('x', 10).attr('y', (yr) => y(yr) + y.bandwidth() / 2).attr('dy', '0.32em')
+            .attr('font-size', 14).style('fill', 'var(--sr-muted)').text((yr) => yr);
+          if (years.includes(2018)) {
+            axis.append('line').attr('x1', 6).attr('x2', width - pad.right).attr('y1', y(2018) - 1).attr('y2', y(2018) - 1)
+              .style('stroke', 'var(--sr-mustard)').attr('stroke-dasharray', '4 4');
+            axis.append('text').attr('x', width - pad.right).attr('y', y(2018) - 6).attr('text-anchor', 'end').attr('font-size', 14)
+              .style('fill', 'var(--sr-mustard)').text('2018 and after ↓');
+          }
+        }
+
+        const slow = !sr.reduced();
+        const dots = svg.select('.sr-dots').selectAll('circle').data(data, (n) => n.s.song_id)
+          .join((enter) => enter.append('circle').attr('cx', (n) => n.x0).attr('cy', (n) => n.y0).attr('r', 0));
+        dots.attr('tabindex', opts.onPick ? 0 : null).style('cursor', opts.onPick ? 'pointer' : null)
+          .style('stroke', (n) => (opts.picked === n.s.song_id ? 'var(--sr-cream)' : 'var(--sr-ink)'))
+          .attr('stroke-width', (n) => (opts.picked === n.s.song_id ? 3 : 1.5));
+        (slow ? dots.transition().duration(900).ease(d3.easeCubicInOut) : dots)
+          .attr('cx', (n) => n.x).attr('cy', (n) => n.y).attr('r', (n) => n.r)
+          .style('fill', (n) => (n.kind === 'plain' ? '#c9a7c4' : sr.color[n.kind]))
+          .style('opacity', (n) => (n.dim ? .16 : n.kind === 'plain' ? .8 : 1));
+
+        // Every revival gets its name. Each label tries spots around its bubble, nearest first, and takes the first one
+        // inside the picture that touches no other label and no labelled bubble; a label set apart gets a thin line to its bubble.
+        const labelled = opts.highlight ? data.filter((n) => (n.kind === 'revival' || n.kind === 'biopic') && !n.dim).sort((a, b) => b.r - a.r).slice(0, 16) : [];
+        const labels = svg.select('.sr-labels').selectAll('text').data(labelled, (n) => n.s.song_id).join('text')
+          .attr('font-size', 14).style('fill', 'var(--sr-cream)').style('paint-order', 'stroke').style('stroke', 'var(--sr-ink)').attr('stroke-width', 3)
+          .text((n) => n.s.song.replace(/\s*[\(\[].*?[\)\]]/g, ''));
+        const placed = [];
+        const bubbles = labelled.map((n) => ({ x0: n.x - n.r, x1: n.x + n.r, y0: n.y - n.r, y1: n.y + n.r, n }));
+        const hits = (a, b) => a.x0 < b.x1 && a.x1 > b.x0 && a.y0 < b.y1 && a.y1 > b.y0;
+        const leaders = [];
+        labels.each(function (n) {
+          const w = this.getComputedTextLength();
+          const spots = [];
+          for (const dy of [0, -18, 18, -36, 36, -54, 54, -72, 72]) {
+            spots.push({ x: n.x + n.r + 5, y: n.y + 4 + dy, a: 'start', dy });
+            spots.push({ x: n.x - n.r - 5, y: n.y + 4 + dy, a: 'end', dy });
+            if (dy === 0) { spots.push({ x: n.x, y: n.y - n.r - 6, a: 'middle', dy: 0 }); spots.push({ x: n.x, y: n.y + n.r + 15, a: 'middle', dy: 0 }); }
+          }
+          const boxOf = (p) => {
+            const x0 = p.a === 'start' ? p.x : p.a === 'end' ? p.x - w : p.x - w / 2;
+            return { x0: x0 - 2, x1: x0 + w + 2, y0: p.y - 14, y1: p.y + 4 };
+          };
+          const spot = spots.find((p) => {
+            const b = boxOf(p);
+            return b.x0 >= Math.max(6, vertical ? pad.left : 6) && b.x1 <= width - 6 && b.y0 >= 26 && b.y1 <= height - 6 &&
+              !placed.some((k) => hits(b, k)) && !bubbles.some((k) => k.n !== n && hits(b, k));
+          });
+          if (!spot) { this.style.display = 'none'; return; }
+          this.style.display = '';
+          placed.push(boxOf(spot));
+          d3.select(this).attr('x', spot.x).attr('y', spot.y).attr('text-anchor', spot.a);
+          if (spot.dy) leaders.push({ n, x: spot.a === 'start' ? spot.x - 2 : spot.x + 2, y: spot.y - 4 });
+        });
+        svg.select('.sr-leaders').selectAll('line').data(leaders).join('line')
+          .attr('x1', (l) => l.n.x).attr('y1', (l) => l.n.y).attr('x2', (l) => l.x).attr('y2', (l) => l.y)
+          .style('stroke', 'var(--sr-muted)').attr('stroke-width', 1).style('opacity', .7);
+        if (slow) labels.style('opacity', 0).transition().delay(700).duration(300).style('opacity', 1);
+
+        let tip = host.querySelector('.sr-tip');
+        if (!tip) { tip = document.createElement('div'); tip.className = 'sr-tip'; tip.hidden = true; host.append(tip); }
+        const show = (event, n) => {
+          tip.replaceChildren();
+          const b = document.createElement('b');
+          b.textContent = n.s.song;
+          const a = document.createElement('div');
+          a.textContent = `${n.s.artist}, ${n.s.song_year}`;
+          const t = document.createElement('div');
+          t.textContent = `${sr.kindName(n.s)}: ${sr.label(n.s)} (${n.s.year})`;
+          const r = document.createElement('div');
+          r.textContent = n.s.best_after ? `Reached #${n.s.best_after} after the release` : 'Not on the chart after the release';
+          const c = document.createElement('div');
+          c.style.fontWeight = '600';
+          c.textContent = opts.onPick ? 'Click to see its sources ↗' : '';
+          tip.append(b, a, t, r);
+          if (opts.onPick) tip.append(c);
+          tip.hidden = false;
+          tip.style.left = Math.min(host.clientWidth - tip.offsetWidth - 8, Math.max(8, n.x / width * host.clientWidth + 12)) + 'px';
+          tip.style.top = Math.max(8, n.y / height * host.clientHeight - tip.offsetHeight - 10) + 'px';
+        };
+        dots.on('mouseenter', show).on('focus', show).on('mouseleave blur', () => { tip.hidden = true; })
+          .on('click', (event, n) => opts.onPick && opts.onPick(n.s.song_id))
+          .on('keydown', (event, n) => { if (opts.onPick && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); opts.onPick(n.s.song_id); } });
+      };
+    },
+    // A song's weekly Hot 100 positions around its release, #1 at the top.
+    run(host, song, runs, cut, big) {
+      host.replaceChildren();
+      const width = host.clientWidth || 400;
+      const height = host.clientHeight || 200;
+      const m = big ? { top: 56, right: 28, bottom: 44, left: 52 } : { top: 12, right: 12, bottom: 24, left: 42 };
+      const mine = runs.filter((r) => r.song_id === song.song_id).map((r) => ({ w: +r.weeks_from_release, pos: +r.position, week: r.chart_week }));
+      const color = song.biopic === 'True' ? 'var(--sr-teal)' : 'var(--sr-orange)';
+      const svg = d3.select(host).append('svg').attr('viewBox', `0 0 ${width} ${height}`).attr('role', 'img')
+        .attr('aria-label', `Weekly Hot 100 positions of ${song.song} around the release`);
+      const x = d3.scaleLinear([-52, 26], [m.left, width - m.right]);
+      const y = d3.scaleLinear([1, 100], [m.top, height - m.bottom]);
+      const fs = big ? 14 : 12;
+      [1, 50, 100].forEach((t) => {
+        svg.append('line').attr('x1', m.left).attr('x2', width - m.right).attr('y1', y(t)).attr('y2', y(t)).style('stroke', 'var(--sr-grid)');
+        svg.append('text').attr('x', m.left - 6).attr('y', y(t)).attr('dy', '0.32em').attr('text-anchor', 'end').attr('font-size', fs).style('fill', 'var(--sr-muted)').text('#' + t);
+      });
+      svg.append('rect').attr('x', x(0)).attr('width', x(12) - x(0)).attr('y', m.top).attr('height', height - m.top - m.bottom).style('fill', 'var(--sr-magenta)').style('opacity', .16);
+      svg.append('line').attr('x1', x(0)).attr('x2', x(0)).attr('y1', m.top).attr('y2', height - m.bottom).style('stroke', 'var(--sr-mustard)').attr('stroke-dasharray', '4 4');
+      svg.append('text').attr('x', x(0) + 5).attr('y', height - m.bottom - 6).attr('font-size', fs).style('fill', 'var(--sr-mustard)').text('Release');
+      if (cut < 100) {
+        svg.append('line').attr('x1', m.left).attr('x2', width - m.right).attr('y1', y(cut)).attr('y2', y(cut)).style('stroke', 'var(--sr-orange)').attr('stroke-dasharray', '2 4');
+        svg.append('text').attr('x', width - m.right).attr('y', y(cut) - 5).attr('text-anchor', 'end').attr('font-size', fs).style('fill', 'var(--sr-orange)').text(`Top ${cut}`);
+      }
+      [-52, 26].forEach((t) => svg.append('text').attr('x', x(t)).attr('y', height - (big ? 16 : 6)).attr('font-size', fs)
+        .attr('text-anchor', t < 0 ? 'start' : 'end').style('fill', 'var(--sr-muted)').text((t > 0 ? '+' : '') + t + ' weeks'));
+      if (!mine.length) {
+        svg.append('text').attr('x', (m.left + width - m.right) / 2).attr('y', (m.top + height - m.bottom) / 2).attr('text-anchor', 'middle')
+          .attr('font-size', fs).style('fill', 'var(--sr-muted)').text('Not on the Hot 100 in these weeks');
+        return;
+      }
+      const parts = [];
+      mine.forEach((r, i) => { if (i === 0 || r.w - mine[i - 1].w > 1) parts.push([]); parts[parts.length - 1].push(r); });
+      const line = d3.line().x((r) => x(r.w)).y((r) => y(r.pos));
+      parts.forEach((part) => {
+        const path = svg.append('path').datum(part).attr('d', line).style('fill', 'none').style('stroke', color)
+          .attr('stroke-width', big ? 3 : 2).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round');
+        if (big && !sr.reduced()) {
+          const len = path.node().getTotalLength();
+          path.attr('stroke-dasharray', `${len} ${len}`).attr('stroke-dashoffset', len).transition().duration(1400).ease(d3.easeCubicOut).attr('stroke-dashoffset', 0);
+        }
+      });
+      const peak = mine.filter((r) => r.w >= 0 && r.w < 12).reduce((a, b) => (!a || b.pos < a.pos ? b : a), null);
+      if (peak) {
+        svg.append('circle').attr('cx', x(peak.w)).attr('cy', y(peak.pos)).attr('r', big ? 8 : 5).style('fill', 'var(--sr-mustard)').style('stroke', 'var(--sr-ink)').attr('stroke-width', 2);
+        svg.append('text').attr('x', x(peak.w) + (big ? 12 : 8)).attr('y', y(peak.pos) + 4).attr('font-size', big ? 15 : 11).style('fill', 'var(--sr-cream)')
+          .style('paint-order', 'stroke').style('stroke', 'var(--sr-ink)').attr('stroke-width', 3).text(`#${peak.pos}`);
+      }
+    },
+  };
+}
+</script>
+
+<script>
+{
+  // The story: one sticky figure that changes as each chapter reaches the middle of the screen.
+  const plot = document.getElementById('story-plot');
+  const label = document.getElementById('story-label');
+  const credit = document.getElementById('story-credit');
+  const SOURCES = {
+    bubbles: [["https://developer.themoviedb.org/reference/discover-movie", "TMDb films"], ["https://developer.themoviedb.org/reference/discover-tv", "TMDb TV series"], ["https://musicbrainz.org/doc/MusicBrainz_API", "MusicBrainz soundtracks"], ["https://github.com/utdata/rwd-billboard-data/blob/main/data-out/hot-100-current.csv", "Billboard Hot 100 (weekly CSV)"]],
+    run: [["https://github.com/utdata/rwd-billboard-data/blob/main/data-out/hot-100-current.csv", "Billboard Hot 100 (weekly CSV)"]],
+  };
+  const setCredit = (which) => {
+    credit.replaceChildren('Source: ');
+    SOURCES[which].forEach(([href, text], i) => {
+      if (i) credit.append(' · ');
+      const a = document.createElement('a'); a.href = href; a.target = '_blank'; a.rel = 'noopener'; a.textContent = text; credit.append(a);
+    });
+  };
+  const drawField = sr.field(plot);
+  let step = 'all';
+
+  const fill = () => {
+    document.querySelectorAll('#story b[data-source], #sources b[data-source], #findings b[data-source]').forEach((el) => {
+      const d = dash.data(el.dataset.source);
+      if (d.status !== 'ok' || !d.data.length) return;
+      const v = d.data[0][el.dataset.field];
+      if (el.dataset.field === 'original_peak_week') el.textContent = v ? String(new Date(v).getUTCFullYear()) : '—';
+      else if (el.dataset.field === 'original_peak' || el.dataset.field === 'best_after') el.textContent = v ? '#' + v : '—';
+      else el.textContent = typeof v === 'number' ? d3.format(',')(v) : v;
+    });
+  };
+
+  const drawStory = () => {
+    const songs = dash.data('older_songs');
+    const runs = dash.data('chart_runs');
+    if (songs.status === 'error' || runs.status === 'error') { plot.innerHTML = '<div class="sr-fail">Failed to load</div>'; return; }
+    if (songs.status !== 'ok') return;
+    if (step === 'spotlight') {
+      const spot = dash.data('spotlight');
+      const song = spot.status === 'ok' && spot.data[0];
+      label.textContent = 'Running Up That Hill · Hot 100, week by week';
+      setCredit('run');
+      if (song && runs.status === 'ok') sr.run(plot, song, runs.data, 50, true);
+      return;
+    }
+    setCredit('bubbles');
+    label.textContent = step === 'all' ? 'Older songs' : step === 'revivals' ? 'Revivals · orange from a scene, teal from a biopic' : 'Older songs by year, read down';
+    drawField(songs.data, {
+      layout: step === 'years' ? 'years' : 'speaker', highlight: step !== 'all', cut: 50,
+      aria: 'Older songs as bubbles' + (step !== 'all' ? ', revivals in orange and teal' : '') + '; click a bubble to see its sources',
+      onPick: (id) => {
+        dash.setParams({ song: id });
+        document.getElementById('detail').scrollIntoView({ behavior: sr.reduced() ? 'auto' : 'smooth', block: 'start' });
+      },
+    });
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      document.querySelectorAll('.sr-step').forEach((s) => s.classList.toggle('sr-on', s === e.target));
+      if (step !== e.target.dataset.step) { step = e.target.dataset.step; dash.setLink(e.target.id); drawStory(); }
+    });
+  }, { root: document, rootMargin: '-45% 0px -45% 0px' });
+  document.querySelectorAll('.sr-step').forEach((s) => observer.observe(s));
+
+  // The menu bar marks the section in view.
+  const tabs = [...document.querySelectorAll('.sr-nav a.sr-tab')];
+  const sections = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) tabs.forEach((t) => t.classList.toggle('sr-here', t.getAttribute('href') === '#' + e.target.id));
+    });
+  }, { root: document, rootMargin: '-40% 0px -55% 0px' });
+  ['story', 'findings', 'explore', 'genres', 'sources'].forEach((id) => sections.observe(document.getElementById(id)));
+  tabs.concat(document.querySelector('.sr-brand')).forEach((a) => a.addEventListener('click', (event) => {
+    const target = document.getElementById(a.getAttribute('href').slice(1));
+    if (!target) return;
+    event.preventDefault();
+    target.scrollIntoView({ behavior: sr.reduced() ? 'auto' : 'smooth' });
+    dash.setLink(target.id);
+  }));
+
+  dash.onData(() => { fill(); drawStory(); });
+  // Labels are measured in the page's fonts, so draw again once they have loaded.
+  if (document.fonts) document.fonts.ready.then(drawStory);
+}
+</script>
+
+<script>
+{
+  // The explorer: filter chips, a vertical timeline of bubbles, a song card that stays in view, genre and decade charts, and the table.
+  const q = document.getElementById('sr-q');
+  const timeline = document.getElementById('timeline-plot');
+  const detail = document.getElementById('detail');
+  const tbody = document.querySelector('#songs-table tbody');
+  const count = document.getElementById('count');
+  const genreChips = document.getElementById('genre-chips');
+  const decadeChips = document.getElementById('decade-chips');
+  const drawTimeline = sr.field(timeline);
+
+  q.addEventListener('input', () => dash.setParams({ q: q.value }));
+  document.querySelectorAll('[data-kind]').forEach((b) => b.addEventListener('click', () => dash.setParams({ kind: b.dataset.kind })));
+  document.querySelectorAll('[data-view]').forEach((b) => b.addEventListener('click', () => dash.setParams({ view: b.dataset.view })));
+  document.querySelectorAll('[data-top]').forEach((b) => b.addEventListener('click', () => dash.setParams({ top: +b.dataset.top })));
+  document.getElementById('sr-biopics').addEventListener('click', () => dash.setParams({ biopics: !sr.params().biopics }));
+  document.getElementById('sr-reset').addEventListener('click', () => {
+    dash.resetParams();
+    dash.setParams({ q: '', kind: 'all', biopics: true, song: null, top: 50, genre: null, decade: null, view: 'speaker' });
+  });
+  document.getElementById('sr-surprise').addEventListener('click', () => {
+    const songs = dash.data('older_songs');
+    if (songs.status !== 'ok') return;
+    const p = sr.params();
+    const cut = +p.top || 50;
+    let pool = songs.data.filter((s) => sr.matches(s, p) && sr.result(s, cut) === 'revival' && s.song_id !== p.song);
+    if (!pool.length) pool = songs.data.filter((s) => sr.matches(s, p) && s.song_id !== p.song);
+    if (!pool.length) return;
+    dash.setParams({ song: pool[Math.floor(Math.random() * pool.length)].song_id });
+    if (window.matchMedia('(max-width: 52rem)').matches) detail.scrollIntoView({ behavior: sr.reduced() ? 'auto' : 'smooth', block: 'start' });
+  });
+  tbody.addEventListener('click', (event) => {
+    const row = event.target.closest('tr[data-key]');
+    if (row) dash.setParams({ song: row.dataset.key });
+  });
+
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; };
+  const link = (href, text) => { const a = el('a', null, text); a.href = href; a.target = '_blank'; a.rel = 'noopener'; return a; };
+  const pill = (r, text) => { const p = el('span', 'sr-pill', text); p.dataset.r = r; return p; };
+  const stat = (name, value) => { const box = el('div', 'sr-stat'); box.append(el('span', null, name), el('strong', null, value)); return box; };
+
+  const card = (song, runs, cut) => {
+    detail.replaceChildren();
+    const group = sr.group(song, cut);
+    const aired = new Date(song.event_date);
+    const iso = d3.utcFormat('%Y-%m-%d');
+    const windowText = `${iso(d3.utcMonth.offset(aired, -12))} ${iso(d3.min([d3.utcMonth.offset(aired, 12), new Date()]))}`;
+    const billboard = (week) => `https://www.billboard.com/charts/hot-100/${week}/`;
+    const after = runs.filter((r) => r.song_id === song.song_id && +r.weeks_from_release >= 0 && +r.weeks_from_release < 12);
+    const peakWeek = after.length ? after.reduce((a, b) => (+b.position < +a.position ? b : a)).chart_week : null;
+    const trends = 'https://trends.google.com/trends/explore?gprop=youtube&date=' + encodeURIComponent(windowText) + '&q=' + encodeURIComponent(song.song.replace(/\s*[\(\[].*?[\)\]]/g, ''));
+
+    const title = el('h3', 'sr-song');
+    title.append(link(song.musicbrainz_url, song.song));
+    const meta = el('p', 'sr-meta', `${song.artist}, first released in ${song.song_year}. Used in the ${sr.kindName(song).toLowerCase()} `);
+    meta.append(link(song.tmdb_url, sr.label(song)), `, which came out ${sr.day(song.event_date)}.`);
+
+    const tags = el('div', 'sr-tags');
+    tags.append(pill(group === 'biopic' ? 'biopic' : group, group === 'biopic' ? 'revival · biopic' : group === 'absent' ? 'no revival' : group));
+    if (song.biopic === 'True' && group !== 'biopic') tags.append(pill('biopic', 'biopic'));
+    tags.append(pill('kind', sr.kindName(song)));
+    if (song.genre_family) tags.append(pill('genre', song.genre ? `${song.genre_family} · ${song.genre}` : song.genre_family));
+
+    const sources = el('div', 'sr-srcrow');
+    const links = el('div', 'sr-links');
+    links.append(link(song.tmdb_url, `TMDb: ${song.title}`), link(song.musicbrainz_url, 'MusicBrainz: the song'));
+    if (song.original_peak_week) links.append(link(billboard(song.original_peak_week), `Billboard, ${sr.day(song.original_peak_week)}`));
+    if (peakWeek) links.append(link(billboard(peakWeek), `Billboard, ${sr.day(peakWeek)}`));
+    links.append(link(trends, 'Google Trends (YouTube)'));
+    sources.append(el('span', null, 'Sources for this song'), links);
+
+    // Each big number opens the Billboard chart of the week it comes from.
+    const statLink = (name, value, week) => {
+      if (!week) return stat(name, value);
+      const a = link(billboard(week), '');
+      a.className = 'sr-stat';
+      a.append(el('span', null, name), el('strong', null, value), el('em', null, 'Billboard, ' + sr.day(week) + ' ↗'));
+      return a;
+    };
+    const stats = el('div', 'sr-stats');
+    stats.append(statLink('First time around', song.original_peak ? '#' + song.original_peak : 'never charted', song.original_peak_week),
+      statLink(`After the ${song.kind === 'series' ? 'series' : 'film'}`, song.best_after ? '#' + song.best_after : 'didn’t chart', peakWeek));
+    const when = el('p', 'sr-meta', (song.original_peak ? `Its best Hot 100 spot before was #${song.original_peak}, in the week of ${sr.day(song.original_peak_week)}.` : 'It had never been on the Hot 100 before.')
+      + (song.best_after ? ` In the 3 months after the release it reached #${song.best_after}.` : ' It didn’t chart in the 3 months after the release.')
+      + (song.biopic === 'True' ? ' This is a music biopic, a film about the artist.' : ''));
+    const runBox = el('div', 'sr-run');
+    const runCredit = el('p', 'sr-credit', 'Weekly position on the ');
+    const bbLink = link('https://github.com/utdata/rwd-billboard-data/blob/main/data-out/hot-100-current.csv', 'Billboard Hot 100');
+    bbLink.className = 'sr-src';
+    runCredit.append(bbLink, ', a year before to six months after.');
+    detail.append(title, meta, tags, sources, stats, when, runBox, runCredit);
+    sr.run(runBox, song, runs, cut, false);
+  };
+
+  // A chart of one row per group: older songs, split into scene revivals, biopic revivals and the rest, on one scale.
+  const bars = (host, title, rows, keyOf, order, picked, onPick, cut, sources) => {
+    const h = el('h3');
+    const a = link(sources[0][0], title);
+    a.className = 'sr-src';
+    h.append(a);
+    host.replaceChildren(h);
+    const groups = d3.rollups(rows, (v) => ({
+      total: v.length,
+      scene: v.filter((s) => sr.group(s, cut) === 'revival').length,
+      biopic: v.filter((s) => sr.group(s, cut) === 'biopic').length,
+    }), keyOf).sort(order);
+    const max = d3.max(groups, ([, g]) => g.total) || 1;
+    for (const [name, g] of groups) {
+      const b = el('button', 'sr-bar');
+      b.type = 'button';
+      b.setAttribute('aria-pressed', String(picked === name));
+      b.setAttribute('aria-label', `${name}: ${g.total} older songs, ${g.scene + g.biopic} revivals`);
+      const track = el('span', 'sr-track');
+      [['scene', '#f45d25'], ['biopic', '#23a08f']].forEach(([k, c]) => {
+        if (!g[k]) return;
+        const i = el('i'); i.style.width = (g[k] / max * 100) + '%'; i.style.minWidth = '8px'; i.style.background = c; track.append(i);
+      });
+      const rest = g.total - g.scene - g.biopic;
+      if (rest) { const i = el('i'); i.style.width = (rest / max * 100) + '%'; i.style.background = '#54405c'; track.append(i); }
+      const n = el('span', 'sr-n', g.scene + g.biopic ? `${g.scene + g.biopic}/${g.total}` : String(g.total));
+      b.append(el('span', 'sr-name', name), track, n);
+      b.addEventListener('click', () => onPick(picked === name ? null : name));
+      host.append(b);
+    }
+    if (!groups.length) host.append(el('p', 'sr-empty', 'No songs match the filters.'));
+  };
+
+  const chips = (host, label, names, picked, onPick) => {
+    host.replaceChildren(el('span', 'sr-rowname', label));
+    const all = el('button', 'sr-chip', 'All');
+    all.type = 'button';
+    all.setAttribute('aria-pressed', String(!picked));
+    all.addEventListener('click', () => onPick(null));
+    host.append(all);
+    for (const name of names) {
+      const c = el('button', 'sr-chip', name);
+      c.type = 'button';
+      c.setAttribute('aria-pressed', String(picked === name));
+      c.addEventListener('click', () => onPick(picked === name ? null : name));
+      host.append(c);
+    }
+  };
+
+  const render = () => {
+    const p = sr.params();
+    if (q !== document.activeElement) q.value = p.q || '';
+    document.querySelectorAll('[data-kind]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.kind === p.kind)));
+    document.querySelectorAll('[data-view]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.view === p.view)));
+    document.querySelectorAll('[data-top]').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.top === (+p.top || 50))));
+    document.getElementById('sr-biopics').setAttribute('aria-pressed', String(!!p.biopics));
+    const songs = dash.data('older_songs');
+    const runs = dash.data('chart_runs');
+    if (songs.status === 'error') { timeline.innerHTML = '<div class="sr-fail">Failed to load</div>'; return; }
+    if (songs.status !== 'ok' || runs.status !== 'ok') return;
+
+    const cut = +p.top || 50;
+    const byCount = (a, b) => b[1].total - a[1].total || d3.ascending(a[0], b[0]);
+    const genres = d3.rollups(songs.data, (v) => v.length, sr.genre).sort((a, b) => b[1] - a[1]).map(([g]) => g);
+    const decades = [...new Set(songs.data.map(sr.decade))].sort();
+    chips(genreChips, 'Genre', genres, p.genre, (g) => dash.setParams({ genre: g }));
+    chips(decadeChips, 'Song from the', decades, p.decade, (d) => dash.setParams({ decade: d }));
+
+    const shown = songs.data.filter((s) => sr.matches(s, p));
+    const ordered = shown.slice().sort((a, b) => sr.rank[sr.group(a, cut)] - sr.rank[sr.group(b, cut)] ||
+      (+a.best_after || 999) - (+b.best_after || 999) || (+a.original_peak || 999) - (+b.original_peak || 999) || b.year - a.year);
+    const song = songs.data.find((s) => s.song_id === p.song) || ordered[0];
+    const revivals = shown.filter((s) => sr.result(s, cut) === 'revival').length;
+    count.textContent = `${d3.format(',')(shown.length)} older songs match · ${d3.format(',')(revivals)} revivals at this cutoff`;
+
+    const speaker = p.view !== 'timeline';
+    if (speaker) timeline.style.height = Math.min(760, Math.max(520, timeline.clientWidth * 1.05)) + 'px';
+    drawTimeline(songs.data, { layout: speaker ? 'speaker' : 'years', rowHeight: speaker ? 0 : 62, highlight: true, cut, match: (s) => sr.matches(s, p), picked: song && song.song_id,
+      onPick: (id) => dash.setParams({ song: id }), aria: speaker ? 'Older songs packed in a speaker, revivals in the middle; click a bubble to see the song' : 'Older songs by year, read down; click a bubble to see the song' });
+    if (song) card(song, runs.data, cut);
+    else detail.replaceChildren(el('p', 'sr-empty', 'No song matches the filters.'));
+
+    bars(document.getElementById('genre-bars'), 'By genre', songs.data.filter((s) => sr.matches(s, p, 'genre')), sr.genre, byCount, p.genre, (g) => dash.setParams({ genre: g }), cut, [["https://musicbrainz.org/doc/Genre", "MusicBrainz genres"], ["https://github.com/utdata/rwd-billboard-data/blob/main/data-out/hot-100-current.csv", "Billboard Hot 100 (weekly CSV)"]]);
+    bars(document.getElementById('decade-bars'), 'By decade of the song', songs.data.filter((s) => sr.matches(s, p, 'decade')), sr.decade,
+      (a, b) => d3.ascending(a[0], b[0]), p.decade, (d) => dash.setParams({ decade: d }), cut, [["https://musicbrainz.org/doc/Recording", "MusicBrainz release years"], ["https://github.com/utdata/rwd-billboard-data/blob/main/data-out/hot-100-current.csv", "Billboard Hot 100 (weekly CSV)"]]);
+
+    tbody.replaceChildren();
+    const pos = (v) => (v ? '#' + v : '—');
+    for (const s of ordered) {
+      const tr = document.createElement('tr');
+      tr.dataset.key = s.song_id;
+      tr.setAttribute('aria-selected', String(Boolean(song && song.song_id === s.song_id)));
+      [s.song, s.artist, s.song_year, sr.genre(s), `${sr.label(s)} (${sr.kindName(s)})`, sr.day(s.event_date), pos(s.original_peak), pos(s.best_after)].forEach((text, i) => {
+        const td = el('td', [2, 6, 7].includes(i) ? 'sr-num' : null, text);
+        tr.append(td);
+      });
+      const td = el('td');
+      const g = sr.group(s, cut);
+      td.append(pill(g, g === 'biopic' ? 'revival · biopic' : sr.result(s, cut)));
+      tr.append(td);
+      tbody.append(tr);
+    }
+  };
+  dash.onData(render);
+  if (document.fonts) document.fonts.ready.then(render);
+
+  const named = document.getElementById(location.hash.slice(1));
+  if (named) setTimeout(() => named.scrollIntoView(), 300);
+}
+</script>
+
+<script>
+{
+  // Sparkles trail the music-note cursor over the page; on a touch screen they burst where you tap. Off when the device asks for less motion.
+  const page = document.querySelector('.sr');
+  const calm = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const colors = ['#f45d25', '#ff4f9a', '#f2b134', '#fbefdc', '#8a6fe8'];
+  const glyphs = ['✦', '✧', '✶', '♪', '·'];
+  let last = 0;
+  const sparkle = (clientX, clientY) => {
+    const box = page.getBoundingClientRect();
+    const s = document.createElement('span');
+    s.className = 'sr-sparkle';
+    s.setAttribute('aria-hidden', 'true');
+    s.textContent = glyphs[Math.floor(Math.random() * glyphs.length)];
+    s.style.left = (clientX - box.left) + 'px';
+    s.style.top = (clientY - box.top) + 'px';
+    s.style.setProperty('--sc', colors[Math.floor(Math.random() * colors.length)]);
+    s.style.setProperty('--z', (10 + Math.random() * 12) + 'px');
+    s.style.setProperty('--dx', ((Math.random() - .5) * 50) + 'px');
+    s.style.setProperty('--dy', (-20 - Math.random() * 40) + 'px');
+    page.append(s);
+    s.addEventListener('animationend', () => s.remove());
+  };
+  page.addEventListener('pointermove', (e) => {
+    if (calm.matches || e.pointerType !== 'mouse') return;
+    const now = performance.now();
+    if (now - last < 35) return;
+    last = now;
+    sparkle(e.clientX + 6, e.clientY - 6);
+  });
+  page.addEventListener('pointerdown', (e) => {
+    if (calm.matches || e.pointerType === 'mouse') return;
+    for (let i = 0; i < 7; i++) sparkle(e.clientX, e.clientY);
+  });
+}
+</script>
+
+</div>
+</body>
+</html>
