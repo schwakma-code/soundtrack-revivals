@@ -278,7 +278,7 @@
       <h1>Soundtrack Revivals</h1>
       <p class="sr-qlabel">Research question</p>
       <p class="sr-question">How do the chart positions of older songs change after appearing in TMDb's most-voted films or series, from 2007 to the present?</p>
-      <p class="sr-sub">Every older song on the soundtracks of TMDb's most-voted films and TV series seasons since 2007, checked against the Billboard Hot 100.</p>
+      <p class="sr-sub">Every song released 10+ years before its on-screen debut, from the soundtracks of TMDb's most-voted films and TV series seasons since 2007, checked against the Billboard Hot 100.</p>
     </div>
   </header>
 
@@ -298,19 +298,19 @@
     <div class="sr-steps">
       <section class="sr-step" data-step="all" id="step-all"><div>
         <h2>Old songs in new hits</h2>
-        <p>Every year since 2007, I took the 10 most-voted <a class="sr-src" href="https://developer.themoviedb.org/reference/discover-movie" target="_blank" rel="noopener">films</a> and the 10 most-voted <a class="sr-src" href="https://developer.themoviedb.org/reference/discover-tv" target="_blank" rel="noopener">TV series seasons</a>. Their <a class="sr-src" href="https://musicbrainz.org/doc/MusicBrainz_API" target="_blank" rel="noopener">soundtracks</a> used <b data-source="summary" data-field="older" data-row="0">—</b> songs that were already at least 10 years old.</p>
+        <p>Every year since 2007, I took the 10 most-voted <a class="sr-src" href="https://www.themoviedb.org/movie" target="_blank" rel="noopener">films</a> and the 10 most-voted <a class="sr-src" href="https://www.themoviedb.org/tv" target="_blank" rel="noopener">TV series seasons</a>. Their <a class="sr-src" href="https://musicbrainz.org/" target="_blank" rel="noopener">soundtracks</a> used <b data-source="summary" data-field="older" data-row="0">—</b> songs that were already at least 10 years old.</p>
         <p class="sr-aside">Each bubble is one of those songs. Click one to see where its data comes from.</p>
       </div></section>
       <section class="sr-step" data-step="revivals" id="step-revivals"><div>
         <h2>Only a few came back</h2>
-        <p>A song counts as a <em>revival</em> if it was not in <a class="sr-src" href="https://github.com/utdata/rwd-billboard-data/blob/main/data-out/hot-100-current.csv" target="_blank" rel="noopener">Billboard’s Hot 100</a> top 50 in the year before the film or series came out, then made the top 50 within 3 months after.</p>
+        <p>A song counts as a <em>revival</em> if it was not in <a class="sr-src" href="https://utdata.github.io/rwd-billboard-data/" target="_blank" rel="noopener">Billboard’s Hot 100</a> top 50 in the year before the film or series came out, then made the top 50 within 3 months after.</p>
         <p><b data-source="summary" data-field="revivals" data-row="0">—</b> songs did. <b data-source="summary" data-field="revivals_biopics" data-row="0">—</b> of them come from music biopics, films about the musician like <a class="sr-src" href="https://www.themoviedb.org/movie/936075" target="_blank" rel="noopener"><i>Michael</i></a>, in teal. Only <b data-source="summary" data-field="revivals_no_biopics" data-row="0">—</b>, in orange, came back because a film or series placed them in a scene.</p>
         <p class="sr-aside">The bigger the bubble, the higher the song climbed.</p>
       </div></section>
       <section class="sr-step" data-step="years" id="step-years"><div>
         <h2>Every revival is recent</h2>
-        <p>Read down by year. Before 2018, these <a class="sr-src" href="https://developer.themoviedb.org/reference/discover-movie" target="_blank" rel="noopener">films</a> and <a class="sr-src" href="https://developer.themoviedb.org/reference/discover-tv" target="_blank" rel="noopener">series</a> used <b data-source="summary" data-field="older_before_2018" data-row="0">—</b> older songs, and <b data-source="summary" data-field="revivals_before_2018" data-row="0">—</b> of them came back.</p>
-        <p>One reason: since 2013, the <a class="sr-src" href="https://github.com/utdata/rwd-billboard-data/blob/main/data-out/hot-100-current.csv" target="_blank" rel="noopener">Hot 100</a> counts streams. When an episode sends millions of people to play a song, it can jump onto the chart the same week.</p>
+        <p>Read down by year. Before 2018, these <a class="sr-src" href="https://www.themoviedb.org/movie" target="_blank" rel="noopener">films</a> and <a class="sr-src" href="https://www.themoviedb.org/tv" target="_blank" rel="noopener">series</a> used <b data-source="summary" data-field="older_before_2018" data-row="0">—</b> older songs, and <b data-source="summary" data-field="revivals_before_2018" data-row="0">—</b> of them came back.</p>
+        <p>One reason: since 2013, the <a class="sr-src" href="https://utdata.github.io/rwd-billboard-data/" target="_blank" rel="noopener">Hot 100</a> counts streams. When an episode sends millions of people to play a song, it can jump onto the chart the same week.</p>
       </div></section>
       <section class="sr-step sr-spin" data-step="spotlight" id="step-spotlight"><div>
         <div class="sr-spinhead">
@@ -336,9 +336,9 @@
     <svg class="sr-blob" style="right: 0; top: 1rem" aria-hidden="true"><use href="#sr-blob"/></svg>
     <h2 class="sr-poster">What the charts say</h2>
     <div class="sr-quotes">
-      <div class="sr-quote"><p>“<b data-source="findings" data-field="never_after" data-row="0">—</b> of <b data-source="findings" data-field="older" data-row="0">—</b> older songs never reached the <a class="sr-src" href="https://github.com/utdata/rwd-billboard-data/blob/main/data-out/hot-100-current.csv" target="_blank" rel="noopener">Hot 100</a> after their film or TV series came out.”</p></div>
-      <div class="sr-quote"><p>“<b data-source="findings" data-field="revivals_since_2018" data-row="0">—</b> of <b data-source="findings" data-field="revivals" data-row="0">—</b> revivals came in 2018 or later, after <a class="sr-src" href="https://github.com/utdata/rwd-billboard-data/blob/main/data-out/hot-100-current.csv" target="_blank" rel="noopener">the chart</a> began counting streams.”</p></div>
-      <div class="sr-quote"><p>“<b data-source="findings" data-field="top_older_genre" data-row="0">—</b> is the <a class="sr-src" href="https://musicbrainz.org/doc/Genre" target="_blank" rel="noopener">genre</a> films and series use most (<b data-source="findings" data-field="top_older_count" data-row="0">—</b> songs), but <b data-source="findings" data-field="top_revival_count" data-row="0">—</b> of the revivals are <b data-source="findings" data-field="top_revival_genre" data-row="0">—</b>.”</p></div>
+      <div class="sr-quote"><p>“<b data-source="findings" data-field="never_after" data-row="0">—</b> of <b data-source="findings" data-field="older" data-row="0">—</b> older songs never reached the <a class="sr-src" href="https://utdata.github.io/rwd-billboard-data/" target="_blank" rel="noopener">Hot 100</a> after their film or TV series came out.”</p></div>
+      <div class="sr-quote"><p>“<b data-source="findings" data-field="revivals_since_2018" data-row="0">—</b> of <b data-source="findings" data-field="revivals" data-row="0">—</b> revivals came in 2018 or later, after <a class="sr-src" href="https://utdata.github.io/rwd-billboard-data/" target="_blank" rel="noopener">the chart</a> began counting streams.”</p></div>
+      <div class="sr-quote"><p>“<b data-source="findings" data-field="top_older_genre" data-row="0">—</b> is the <a class="sr-src" href="https://musicbrainz.org/" target="_blank" rel="noopener">genre</a> films and series use most (<b data-source="findings" data-field="top_older_count" data-row="0">—</b> songs), but <b data-source="findings" data-field="top_revival_count" data-row="0">—</b> of the revivals are <b data-source="findings" data-field="top_revival_genre" data-row="0">—</b>.”</p></div>
     </div>
   </section>
 
@@ -347,7 +347,7 @@
   <section class="sr-wrap sr-section" id="explore">
     <svg class="sr-blob" style="right: 1rem; top: 1.5rem; width: 6rem; height: 6rem; color: var(--sr-mustard); opacity: .5" aria-hidden="true"><use href="#sr-blob"/></svg>
     <h2 class="sr-head2">Dig through the crate</h2>
-    <p class="sr-intro">Every older song from the <a class="sr-src" href="https://developer.themoviedb.org/reference/discover-movie" target="_blank" rel="noopener">films</a> and <a class="sr-src" href="https://developer.themoviedb.org/reference/discover-tv" target="_blank" rel="noopener">TV series</a>, found on their <a class="sr-src" href="https://musicbrainz.org/doc/MusicBrainz_API" target="_blank" rel="noopener">soundtracks</a> and checked against the <a class="sr-src" href="https://github.com/utdata/rwd-billboard-data/blob/main/data-out/hot-100-current.csv" target="_blank" rel="noopener">Hot 100</a>. Click a bubble: on its card, the song links to MusicBrainz, the film or series to TMDb, and each chart number to that week's Billboard chart.</p>
+    <p class="sr-intro">Every older song from the <a class="sr-src" href="https://www.themoviedb.org/movie" target="_blank" rel="noopener">films</a> and <a class="sr-src" href="https://www.themoviedb.org/tv" target="_blank" rel="noopener">TV series</a>, found on their <a class="sr-src" href="https://musicbrainz.org/" target="_blank" rel="noopener">soundtracks</a> and checked against the <a class="sr-src" href="https://utdata.github.io/rwd-billboard-data/" target="_blank" rel="noopener">Hot 100</a>. Click a bubble: on its card, the song links to MusicBrainz, the film or series to TMDb, and each chart number to that week's Billboard chart.</p>
     <div class="sr-controls" id="filters">
       <div class="sr-row">
         <label class="sr-rowname" for="sr-q">Search</label>
@@ -414,7 +414,7 @@
 
   <section class="sr-wrap sr-section" id="genres">
     <h2 class="sr-head2">What kind of songs come back?</h2>
-    <p class="sr-intro">Older songs by <a class="sr-src" href="https://musicbrainz.org/doc/Genre" target="_blank" rel="noopener">genre</a> and by the <a class="sr-src" href="https://musicbrainz.org/doc/Recording" target="_blank" rel="noopener">decade they first came out</a>, with revivals from the <a class="sr-src" href="https://github.com/utdata/rwd-billboard-data/blob/main/data-out/hot-100-current.csv" target="_blank" rel="noopener">Hot 100</a>, following the filters above. Orange and teal are the revivals. Click a row to filter everything by it; click again to clear.</p>
+    <p class="sr-intro">Older songs by <a class="sr-src" href="https://musicbrainz.org/" target="_blank" rel="noopener">genre</a> and by the <a class="sr-src" href="https://musicbrainz.org/" target="_blank" rel="noopener">decade they first came out</a>, with revivals from the <a class="sr-src" href="https://utdata.github.io/rwd-billboard-data/" target="_blank" rel="noopener">Hot 100</a>, following the filters above. Orange and teal are the revivals. Click a row to filter everything by it; click again to clear.</p>
     <div class="sr-twin">
       <div class="sr-box sr-bars" id="genre-bars" data-source="older_songs"><h3>By genre</h3></div>
       <div class="sr-box sr-bars" id="decade-bars" data-source="older_songs"><h3>By decade of the song</h3></div>
@@ -426,11 +426,11 @@
   <section class="sr-wrap sr-section sr-sources" id="sources">
     <h2 class="sr-head2">How it's counted</h2>
     <ul class="sr-method">
-      <li>The titles: for each year since 2007, the 10 <a class="sr-src" href="https://developer.themoviedb.org/reference/discover-movie" target="_blank" rel="noopener">films</a> and the 10 scripted <a class="sr-src" href="https://developer.themoviedb.org/reference/discover-tv" target="_blank" rel="noopener">TV series</a> with a season beginning that year that the most TMDb users have rated. <b data-source="summary" data-field="with_album" data-row="0">—</b> of the <b data-source="summary" data-field="titles" data-row="0">—</b> titles have a <a class="sr-src" href="https://musicbrainz.org/doc/MusicBrainz_API" target="_blank" rel="noopener">soundtrack album on MusicBrainz</a>; the rest can't be counted.</li>
-      <li>An older song came out at least 10 years before the film or TV season it plays in, by its <a class="sr-src" href="https://musicbrainz.org/doc/Recording" target="_blank" rel="noopener">earliest release on MusicBrainz</a>. Score albums, remixes and singles are left out.</li>
-      <li>A revival: not in the <a class="sr-src" href="https://github.com/utdata/rwd-billboard-data/blob/main/data-out/hot-100-current.csv" target="_blank" rel="noopener">Billboard Hot 100</a>'s top 50 (or the cutoff you pick) in the year before the release, then inside it in the 3 months (12 weeks) after. The Hot 100 data is every weekly chart since 1958, <a class="sr-src" href="https://github.com/utdata/rwd-billboard-data" target="_blank" rel="noopener">collected by a University of Texas course</a>.</li>
+      <li>The titles: for each year since 2007, the 10 <a class="sr-src" href="https://www.themoviedb.org/movie" target="_blank" rel="noopener">films</a> and the 10 scripted <a class="sr-src" href="https://www.themoviedb.org/tv" target="_blank" rel="noopener">TV series</a> with a season beginning that year that the most TMDb users have rated. <b data-source="summary" data-field="with_album" data-row="0">—</b> of the <b data-source="summary" data-field="titles" data-row="0">—</b> titles have a <a class="sr-src" href="https://musicbrainz.org/" target="_blank" rel="noopener">soundtrack album on MusicBrainz</a>; the rest can't be counted.</li>
+      <li>An older song came out at least 10 years before the film or TV season it plays in, by its <a class="sr-src" href="https://musicbrainz.org/" target="_blank" rel="noopener">earliest release on MusicBrainz</a>. Score albums, remixes and singles are left out.</li>
+      <li>A revival: not in the <a class="sr-src" href="https://utdata.github.io/rwd-billboard-data/" target="_blank" rel="noopener">Billboard Hot 100</a>'s top 50 (or the cutoff you pick) in the year before the release, then inside it in the 3 months (12 weeks) after. The Hot 100 data is every weekly chart since 1958, <a class="sr-src" href="https://utdata.github.io/rwd-billboard-data/" target="_blank" rel="noopener">collected by a University of Texas course</a>.</li>
       <li>Music biopics are films about the artist: <a class="sr-src" href="https://www.themoviedb.org/movie/424694" target="_blank" rel="noopener"><i>Bohemian Rhapsody</i></a> and <a class="sr-src" href="https://www.themoviedb.org/movie/936075" target="_blank" rel="noopener"><i>Michael</i></a>. They are shown in teal, apart from songs placed in a scene.</li>
-      <li>Genres are the ones <a class="sr-src" href="https://musicbrainz.org/doc/Genre" target="_blank" rel="noopener">MusicBrainz users voted for most</a> on the song, or on the artist when the song has none, grouped into broad families.</li>
+      <li>Genres are the ones <a class="sr-src" href="https://musicbrainz.org/" target="_blank" rel="noopener">MusicBrainz users voted for most</a> on the song, or on the artist when the song has none, grouped into broad families.</li>
       <li>Each song card links to its own pages, and to <a class="sr-src" href="https://trends.google.com/trends/" target="_blank" rel="noopener">Google Trends</a> for its YouTube search interest around the release.</li>
       <li>The Hot 100 is a US chart, and it began counting streams in 2012 and 2013, so earlier years are measured differently.</li>
     </ul>
@@ -737,8 +737,8 @@
   const label = document.getElementById('story-label');
   const credit = document.getElementById('story-credit');
   const SOURCES = {
-    bubbles: [["https://developer.themoviedb.org/reference/discover-movie", "TMDb films"], ["https://developer.themoviedb.org/reference/discover-tv", "TMDb TV series"], ["https://musicbrainz.org/doc/MusicBrainz_API", "MusicBrainz soundtracks"], ["https://github.com/utdata/rwd-billboard-data/blob/main/data-out/hot-100-current.csv", "Billboard Hot 100 (weekly CSV)"]],
-    run: [["https://github.com/utdata/rwd-billboard-data/blob/main/data-out/hot-100-current.csv", "Billboard Hot 100 (weekly CSV)"]],
+    bubbles: [["https://www.themoviedb.org/movie", "TMDb films"], ["https://www.themoviedb.org/tv", "TMDb TV series"], ["https://musicbrainz.org/", "MusicBrainz soundtracks"], ["https://utdata.github.io/rwd-billboard-data/", "Billboard Hot 100 (weekly CSV)"]],
+    run: [["https://utdata.github.io/rwd-billboard-data/", "Billboard Hot 100 (weekly CSV)"]],
   };
   const setCredit = (which) => {
     credit.replaceChildren('Source: ');
@@ -905,7 +905,7 @@
       + (song.biopic === 'True' ? ' This is a music biopic, a film about the artist.' : ''));
     const runBox = el('div', 'sr-run');
     const runCredit = el('p', 'sr-credit', 'Weekly position on the ');
-    const bbLink = link('https://github.com/utdata/rwd-billboard-data/blob/main/data-out/hot-100-current.csv', 'Billboard Hot 100');
+    const bbLink = link('https://utdata.github.io/rwd-billboard-data/', 'Billboard Hot 100');
     bbLink.className = 'sr-src';
     runCredit.append(bbLink, ', a year before to six months after.');
     detail.append(title, meta, tags, sources, stats, when, runBox, runCredit);
@@ -994,9 +994,9 @@
     if (song) card(song, runs.data, cut);
     else detail.replaceChildren(el('p', 'sr-empty', 'No song matches the filters.'));
 
-    bars(document.getElementById('genre-bars'), 'By genre', songs.data.filter((s) => sr.matches(s, p, 'genre')), sr.genre, byCount, p.genre, (g) => dash.setParams({ genre: g }), cut, [["https://musicbrainz.org/doc/Genre", "MusicBrainz genres"], ["https://github.com/utdata/rwd-billboard-data/blob/main/data-out/hot-100-current.csv", "Billboard Hot 100 (weekly CSV)"]]);
+    bars(document.getElementById('genre-bars'), 'By genre', songs.data.filter((s) => sr.matches(s, p, 'genre')), sr.genre, byCount, p.genre, (g) => dash.setParams({ genre: g }), cut, [["https://musicbrainz.org/", "MusicBrainz genres"], ["https://utdata.github.io/rwd-billboard-data/", "Billboard Hot 100 (weekly CSV)"]]);
     bars(document.getElementById('decade-bars'), 'By decade of the song', songs.data.filter((s) => sr.matches(s, p, 'decade')), sr.decade,
-      (a, b) => d3.ascending(a[0], b[0]), p.decade, (d) => dash.setParams({ decade: d }), cut, [["https://musicbrainz.org/doc/Recording", "MusicBrainz release years"], ["https://github.com/utdata/rwd-billboard-data/blob/main/data-out/hot-100-current.csv", "Billboard Hot 100 (weekly CSV)"]]);
+      (a, b) => d3.ascending(a[0], b[0]), p.decade, (d) => dash.setParams({ decade: d }), cut, [["https://musicbrainz.org/", "MusicBrainz release years"], ["https://utdata.github.io/rwd-billboard-data/", "Billboard Hot 100 (weekly CSV)"]]);
 
     tbody.replaceChildren();
     const pos = (v) => (v ? '#' + v : '—');
